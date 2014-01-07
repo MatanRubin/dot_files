@@ -1,0 +1,98 @@
+[user]
+	name = Matan Aloni 
+	email = maloni@primarydata.com
+
+[sendemail]
+	from = Matan Aloni <maloni@xxxxxxx>
+	smtpserver = smtp.gmail.com
+	smtpserverport = 465
+	smtpencryption = ssl
+	smtpdomain = xxxxxx.com
+	smtpuser = maloni@xxxxxx.com
+	smtppass = passwd
+	suppresscc = all
+	suppressfrom = yes
+	signedoffbycc = no
+	chainreplyto = no
+
+[push]
+	default = current
+
+[branch]
+	autosetuprebase = always
+
+[core]
+	whitespace = trailing-space,space-before-tab
+	editor = vim
+[diff]
+	tool = meld
+
+[difftool]
+	prompt = false
+
+[color]
+	ui = true
+	branch = auto
+	diff = auto
+	status = auto
+
+#[color "branch"]
+#	current = yellow bold
+#	local = normal
+#	remote = green
+
+#[color "diff"]
+#	plain = normal
+#	meta = yellow bold
+#	frag = magenta bold
+#	old = red bold
+#	new = green bold
+
+#[color "status"]
+#	header = normal
+#	branch = yellow bold
+#	nobranch = magenta
+#	added = green
+#	changed = red
+#	untracked = yellow
+
+[color "grep"]
+	external = --color=always
+
+[guitool "Rebase onto..."]
+	cmd = git rebase
+	revprompt = yes
+[guitool "Rebase/Continue"]
+	cmd = git rebase --continue
+[guitool "Rebase/Skip"]
+	cmd = git rebase --skip
+[guitool "Rebase/Abort"]
+	cmd = git rebase --abort
+[guitool "Pull with Rebase"]
+	cmd = git pull --rebase
+
+[alias]
+       log-pretty  = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+
+[alias]
+	st = status -b
+	br = branch
+	df = diff
+	co = checkout
+	push-tags = push --tags
+	clean-fxd = clean -fxd
+	add-commit = commit -a
+	reset-head = reset --hard HEAD
+	ls = log --oneline --decorate
+	ll = log --oneline --graph --all --pretty --decorate --date=iso
+	lf = log --graph --all --format=format:'%C(yellow)%h%C(reset) - %C(blue)%ci%C(reset) %C(red)%d%C(reset)%n''  %C(normal)%s%C(reset) %C(bold)- %an %C(dim)<%cE> %C(reset)' --abbrev-commit
+	unstage = reset HEAD --
+	visual = !gitk
+
+
+[giggle]
+	main-window-maximized = false
+	main-window-geometry = 700x550+0+59
+	main-window-view = FileView
+[merge]
+	tool = kdiff3
