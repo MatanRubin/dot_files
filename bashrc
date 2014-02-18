@@ -95,3 +95,7 @@ if [[ $platform == 'linux' ]]; then
 	# set ls colors to ansi-light
 	eval `dircolors ~/dircolors-solarized/dircolors.ansi-light`
 fi
+
+
+# Simpler job control
+alias j='jobs ; read -p "Activate process number: " job ; fg $job'
