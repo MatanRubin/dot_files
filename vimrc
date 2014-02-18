@@ -87,7 +87,7 @@ endif
 	Bundle 'pyflakes.vim'
 	"Bundle 'pydoc.vim'
 	Bundle 'pep8'
-	Bundle 'pytest.vim'
+	"Bundle 'pytest.vim' - did not use it so far
 	"Bundle 'https://github.com/davidhalter/jedi-vim' - annoying
 	"autocomplete, removed for now.
 
@@ -217,6 +217,7 @@ nmap <leader>a <Esc>:Ack!
 
 " Python-mode
 " Activate rope
+let g:pymode_rope = 1
 " Keys:
 " K             Show python docs
 " <Ctrl-Space>  Rope autocomplete
@@ -228,7 +229,6 @@ nmap <leader>a <Esc>:Ack!
 " ]]            Jump on next class or function (normal, visual, operator modes)
 " [M            Jump on previous class or method (normal, visual, operator modes)
 " ]M            Jump on next class or method (normal, visual, operator modes)
-let g:pymode_rope = 0
 
 " Documentation
 let g:pymode_doc = 1
@@ -236,6 +236,7 @@ let g:pymode_doc_key = 'K'
 
 "Linting
 let g:pymode_lint = 1"let g:vim_debug_disable_mappings = 1
+let g:pymode_rope_rename_bind = '<C-c>rr'
 
 "Use Ctrl+Return to rotate between windows
 nnoremap <C-> <C-w><C-w> 
@@ -397,3 +398,8 @@ iab retrun return
 
 " Commenting
 
+" x and xx perform "cut", d and dd perform "delete"
+noremap x d
+noremap xx dd
+noremap d "_d
+noremap dd "_dd
