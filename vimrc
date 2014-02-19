@@ -111,11 +111,11 @@ endif
 	Bundle 'powerman/vim-plugin-viewdoc'
 
 	" C bundles
-	Bundle 'https://github.com/scrooloose/syntastic.git'
+	"Bundle 'https://github.com/scrooloose/syntastic.git'
 	" YouCompleteMe needs special manual install that is LONG but well
 	" explained in https://github.com/Valloric/YouCompleteMe
 	" Be sure to also change the compilation flags according to your
-	" prohject (instruction in YCM documentation
+	" project (instruction in YCM documentation
 	Bundle 'Valloric/YouCompleteMe'
 	
 	" Improved C syntax highlighting - highlights user defined functions
@@ -286,8 +286,8 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 let g:pymode_folding = 0
 
 " Jedi-vim
-let  g:jedi#use_tabs_not_buffers = 0
-let g:jedi#completions_enable = 0
+"let  g:jedi#use_tabs_not_buffers = 0
+"let g:jedi#completions_enable = 0
 
 " Vim Python Debugger
 "map <S-F5> :Dbg .<CR>
@@ -337,7 +337,7 @@ nnoremap <C-\> :tabNext<CR>
 
 " YouCompleteMe
 let g:ycm_confirm_extra_conf = 0
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/dot_files/ycm_extra_conf.py'
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 
@@ -358,11 +358,16 @@ function! g:UltiSnips_Complete()
     endif
     return ""
 endfunction
-au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
 
-" UltiSnip
+au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
+
+" User defined Snippets
+let g:UltiSnipsSnippetsDir="~/dot_files/ultisnips/"
+
+" Stop YCM completion with enter, in addition to default ctrl+y
+imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
 
 " Color Column
 set colorcolumn=80
