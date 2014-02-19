@@ -24,6 +24,7 @@
 [core]
 	whitespace = trailing-space,space-before-tab
 	editor = vim
+	excludesfile = ~/.gitignore_global
 [diff]
 	tool = meld
 
