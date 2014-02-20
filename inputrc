@@ -1,0 +1,3 @@
+# Replicate tcsh Esc+p feature
+"\ep": "\M-\C-p\C-e"
+"\M-\C-p": history-search-backward
