@@ -14,6 +14,7 @@ fi
 
 alias l=less
 alias ll='ls -ltrh -G'
+alias sumcol='paste -sd+ | bc'
 
 export PROMPT_DIRTRIM=3
 export GIT_PS1_SHOWDIRTYSTATE=1
