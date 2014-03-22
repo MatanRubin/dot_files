@@ -88,6 +88,7 @@
 	ll = log --oneline --graph --all --pretty --decorate --date=iso
 	lf = log --graph --all --format=format:'%C(yellow)%h%C(reset) - %C(blue)%ci%C(reset) %C(red)%d%C(reset)%n''  %C(normal)%s%C(reset) %C(bold)- %an %C(dim)<%cE> %C(reset)' --abbrev-commit
 	unstage = reset HEAD --
+	untrack = rm --cached --
 	visual = !gitk
 
 
