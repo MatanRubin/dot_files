@@ -97,6 +97,9 @@ if [[ $platform == 'linux' ]]; then
 	eval `dircolors ~/dircolors-solarized/dircolors.ansi-light`
 fi
 
+if [[ $platform == 'mac' ]]; then
+	alias gvim=mvim
+fi
 
 # Simpler job control
 alias j='jobs ; read -p "Activate process number: " job ; fg $job'
