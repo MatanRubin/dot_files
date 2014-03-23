@@ -66,6 +66,7 @@ endif
 	" Text input bundles
 	"Bundle 'snipMate'
 	Bundle 'SirVer/ultisnips'
+	Bundle 'honza/vim-snippets'
 	Bundle 'SearchComplete'
 	Bundle 'Tabular'
 	Bundle 'unimpaired.vim'
@@ -314,6 +315,10 @@ let g:ycm_global_ycm_extra_conf = '~/dot_files/ycm_extra_conf.py'
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 let g:ycm_collect_identifiers_from_tags_files = 1
+
+" Disable YCM
+"set runtimepath-=~/.vim/bundle/YouCompleteMe
+"set runtimepath-=~/.vim/bundle/YouCompleteMe/after
 
 nnoremap <F3> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
