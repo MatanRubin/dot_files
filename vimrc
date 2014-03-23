@@ -109,6 +109,7 @@ endif
 	Bundle 'https://github.com/reinh/vim-makegreen'
 	Bundle 'https://github.com/rosenfeld/conque-term'
 	Bundle 'powerman/vim-plugin-viewdoc'
+	"Bundle 'https://github.com/brandonbloom/vim-proto'
 
 	" C bundles
 	"Bundle 'https://github.com/scrooloose/syntastic.git'
@@ -237,34 +238,6 @@ let g:pymode_doc_key = 'K'
 "Linting
 let g:pymode_lint = 1"let g:vim_debug_disable_mappings = 1
 let g:pymode_rope_rename_bind = '<C-c>rr'
-
-"Use Ctrl+Return to rotate between windows
-nnoremap <C-> <C-w><C-w> 
-
-"Use Ctrl+Shift+Return to rotate between windows in reverse order
-nnoremap <C-S-> <C-w>W
-
-" New vertical split: ,s
-map <leader>s <C-w><C-v>
-
-" New horizontal split: ,S
-map <leader>S <C-w><C-s>
-
-" Close split: ,q
-"map <leader>q <C-w><C-q>
-
-" increase/decrease split window size
-map <C-w>> :30winc ><CR>
-map <C-w>< :30winc <<CR>
-
-" Rotate buffers in current window
-nnoremap <C-Tab> :bn<CR>
-
-" Rotate tabs
-nnoremap <C-\> :tabNext<CR>
-
-" Change current directory to the directory of the file in buffer
-"nmap
 let g:pymode_lint_checker = "pyflakes,pep8"
 " Auto check on save
 let g:pymode_lint_write = 1
@@ -340,28 +313,29 @@ let g:ycm_confirm_extra_conf = 0
 let g:ycm_global_ycm_extra_conf = '~/dot_files/ycm_extra_conf.py'
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
+let g:ycm_collect_identifiers_from_tags_files = 1
 
 nnoremap <F3> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " Complete UltiSnip snippets with <tab>
 function! g:UltiSnips_Complete()
-    call UltiSnips_ExpandSnippet()
+    call UltiSnips#ExpandSnippet()
     if g:ulti_expand_res == 0
-        if pumvisible()
-            return "\<C-n>"
-        else
-            call UltiSnips_JumpForwards()
-            if g:ulti_jump_forwards_res == 0
-               return "\<TAB>"
-            endif
-        endif
+	if pumvisible()
+	    return "\<C-n>"
+	else
+	    call UltiSnips#JumpForwards()
+	    if g:ulti_jump_forwards_res == 0
+	       return "\<TAB>"
+	    endif
+	endif
     endif
     return ""
 endfunction
 
-au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
+au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
 
 " User defined Snippets
 let g:UltiSnipsSnippetsDir="~/dot_files/ultisnips/"
