@@ -12,9 +12,24 @@ elif [[ $OSTYPE == 'linux-gnu' ]]; then
 	platform='linux'
 fi
 
+##################### Aliases ########################
+
 alias l=less
 alias ll='ls -ltrh -G'
 alias sumcol='paste -sd+ | bc'
+alias dirs='dirs -p -v'
+# GDB Text UI
+alias gdb='gdb -tui'
+# Simpler job control
+alias j='jobs ; read -p "Activate process number: " job ; fg $job'
+alias "c=xclip"
+alias "v=xclip -o"
+alias "info=info --vi-keys"
+alias "ctags=ctags -R --fields=+l"
+
+######################################################
+ 
+###################### Git ###########################
 
 export PROMPT_DIRTRIM=3
 export GIT_PS1_SHOWDIRTYSTATE=1
@@ -58,6 +73,8 @@ alias gdu='git diff'            # gdu == "git diff, UNSTAGED changes"
 alias gda='git diff HEAD'       # gda == "git diff, ALL changes, stages & unstaged"
 alias gad='git add'
 
+######################################################
+
 # Colored man pages
 #man() {
 #	env \
@@ -82,8 +99,6 @@ man() {
 		man "$@"
 }
 
-# GDB Text UI
-alias gdb='gdb -tui'
 
 # ls colors
 if [[ $platform == 'linux' ]]; then
@@ -101,5 +116,3 @@ if [[ $platform == 'mac' ]]; then
 	alias gvim=mvim
 fi
 
-# Simpler job control
-alias j='jobs ; read -p "Activate process number: " job ; fg $job'
