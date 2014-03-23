@@ -80,7 +80,11 @@ flags = [
 '-isystem',
 './tests/gmock',
 '-isystem',
-'./tests/gmock/include'
+'./tests/gmock/include',
+'-I',
+'./src/include',
+'-I',
+'./src/libs'
 ]
 
 # Set this to the absolute path to the folder (NOT the file!) containing the
