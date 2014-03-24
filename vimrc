@@ -387,3 +387,33 @@ noremap x d
 noremap xx dd
 noremap d "_d
 noremap dd "_dd
+
+" Emacs shortcuts
+set winaltkeys=no "To enable shortcut with Alt, otherwise Alt open GUI menus.
+" insert mode
+imap <C-b> <Left>
+imap <C-f> <Right>
+imap <C-a> <C-o>^
+imap <C-e> <End>
+imap <M-b> <C-o>b
+imap <M-f> <C-o>e<Right>
+imap <C-d> <Del>
+imap <C-h> <BS>
+imap <M-d> <C-o>de
+imap <M-h> <C-w>
+imap <C-k> <C-o>d$
+
+" command line mode
+cmap <C-p> <Up>
+cmap <C-n> <Down>
+cmap <C-b> <Left>
+cmap <C-f> <Right>
+cmap <C-a> <Home>
+cmap <C-e> <End>
+cmap <M-b> <S-Left>
+cmap <M-f> <S-Right>
+cnoremap <C-d> <Del>
+cnoremap <C-h> <BS>
+cnoremap <M-d> <S-Right><C-w>
+cnoremap <M-h> <C-w>
+cnoremap <C-k> <C-f>D<C-c><C-c>:<Up>
