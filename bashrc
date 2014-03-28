@@ -113,6 +113,7 @@ if [[ $platform == 'linux' ]]; then
 fi
 
 if [[ $platform == 'mac' ]]; then
+	alias vim=/Applications/MacVim.app/Contents/MacOS/Vim
 	alias gvim=mvim
 fi
 
