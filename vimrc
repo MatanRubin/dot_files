@@ -1,4 +1,5 @@
 " General Settings
+let $PATH = '/usr/bin:'.$PATH
 set number
 set hlsearch
 set ignorecase smartcase
@@ -11,28 +12,27 @@ set novisualbell
 
 " ==================================
 "              MOLOKAI AUTO INSTALL
-" "=================================
+" =================================
 let iCanHazMolokai=1
 let molokai_file=expand('~/.vim/colors/molokai.vim')
 if !filereadable(molokai_file)
-    echo "Installing Molokai color theme.."
-    echo ""
+    echo "Installing Molokai color theme."
     silent !mkdir -p ~/.vim/colors
     silent !wget -P ~/.vim/colors https://raw.github.com/tomasr/molokai/master/colors/molokai.vim 
     let iCanHazMolokai=0
 endif
 
 " Color Scheme
-if has ('gui_running')
-        colorscheme molokai
-	"let g:molokai_original = 1
-        "syntax on
-	set guifont=Monospace\ 11
-else
-        "colorscheme default
-        colorscheme molokai
-	"let g:molokai_original = 1
-endif
+colorscheme molokai
+let g:molokai_original = 1
+syntax on
+
+"if has ('gui_running')
+	set guifont=Menlo:h14
+"else
+"        colorscheme molokai
+"	let g:molokai_original = 1
+"endif
 
  
 " ==================================
@@ -40,17 +40,18 @@ endif
 " "=================================
 " Setting up Vundle - the vim plugin bundler
 " Based on: http://www.erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
-    let iCanHazVundle=1
-    let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
-    if !filereadable(vundle_readme)
-        echo "Installing Vundle.."
-        echo ""
-        silent !mkdir -p ~/.vim/bundle
-        silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
- let iCanHazVundle=0
-    endif
-    set rtp+=~/.vim/bundle/vundle/
-    call vundle#rc()
+let iCanHazVundle=1
+let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+ 
+if !filereadable(vundle_readme)
+	echo "Installing Vundle.."
+	echo ""
+	silent !mkdir -p ~/.vim/bundle
+	silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+	let iCanHazVundle=0
+endif
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 "if has ('gui_running')
 	Bundle 'gmarik/vundle'
 	" Installed Bundles
@@ -68,7 +69,7 @@ endif
 	Bundle 'SirVer/ultisnips'
 	Bundle 'honza/vim-snippets'
 	Bundle 'SearchComplete'
-	Bundle 'Tabular'
+"	Bundle 'Tabular'
 	Bundle 'unimpaired.vim'
 	Bundle 'VisIncr'
 	Bundle 'Align'
@@ -78,9 +79,9 @@ endif
 	" User interface bundles
 	Bundle 'https://github.com/Lokaltog/vim-powerline'
 	Bundle 'https://github.com/mhinz/vim-startify.git'
-	Bundle 'fontsize.vim'
-	Bundle 'git://github.com/altercation/vim-colors-solarized.git'
-	Bundle 'https://github.com/tpope/vim-vividchalk.git'
+"	Bundle 'fontsize.vim'
+"	Bundle 'git://github.com/altercation/vim-colors-solarized.git'
+"	Bundle 'https://github.com/tpope/vim-vividchalk.git'
 
 	" Python bundles
 	Bundle 'indentpython.vim'
@@ -93,8 +94,8 @@ endif
 	"autocomplete, removed for now.
 
 	" Git bundles
-	Bundle 'http://github.com/tpope/vim-fugitive.git'
-	Bundle 'https://github.com/tpope/vim-git.git'
+"	Bundle 'http://github.com/tpope/vim-fugitive.git'
+"	Bundle 'https://github.com/tpope/vim-git.git'
 
 	" Unused bundles
 	"Bundle 'taglist.vim'
@@ -105,12 +106,12 @@ endif
 	Bundle 'The-NERD-Commenter'
 
 	" General bundles
-	Bundle 'Gundo'
-	Bundle 'TaskList.vim'
-	Bundle 'https://github.com/reinh/vim-makegreen'
-	Bundle 'https://github.com/rosenfeld/conque-term'
-	Bundle 'powerman/vim-plugin-viewdoc'
-	"Bundle 'https://github.com/brandonbloom/vim-proto'
+"	Bundle 'Gundo'
+"	Bundle 'TaskList.vim'
+"	Bundle 'https://github.com/reinh/vim-makegreen'
+"	Bundle 'https://github.com/rosenfeld/conque-term'
+"	Bundle 'powerman/vim-plugin-viewdoc'
+        Bundle 'https://github.com/brandonbloom/vim-proto'
 
 	" C bundles
 	"Bundle 'https://github.com/scrooloose/syntastic.git'
@@ -307,7 +308,7 @@ nnoremap <C-Tab> :bn<CR>
 nnoremap <C-\> :tabNext<CR>
 
 " Change current directory to the directory of the file in buffer
-"nmap <silent> <leader>cd :cd %:p:h<cr>:pwd<cr>
+"unmap <silent> <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " YouCompleteMe
 let g:ycm_confirm_extra_conf = 0
@@ -317,8 +318,11 @@ let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 let g:ycm_collect_identifiers_from_tags_files = 1
 
 " Disable YCM
-"set runtimepath-=~/.vim/bundle/YouCompleteMe
-"set runtimepath-=~/.vim/bundle/YouCompleteMe/after
+set runtimepath-=~/.vim/bundle/YouCompleteMe
+set runtimepath-=~/.vim/bundle/YouCompleteMe/after
+" YCM debugging
+"let g:ycm_server_use_vim_stdout = 1
+"let g:ycm_server_log_level = 'debug'
 
 nnoremap <F3> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
@@ -417,3 +421,5 @@ cnoremap <C-h> <BS>
 cnoremap <M-d> <S-Right><C-w>
 cnoremap <M-h> <C-w>
 cnoremap <C-k> <C-f>D<C-c><C-c>:<Up>
+
+
