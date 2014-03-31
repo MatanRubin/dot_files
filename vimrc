@@ -27,12 +27,11 @@ colorscheme molokai
 let g:molokai_original = 1
 syntax on
 
-"if has ('gui_running')
+if has ('gui_macvim')
 	set guifont=Menlo:h14
-"else
-"        colorscheme molokai
-"	let g:molokai_original = 1
-"endif
+elseif has ('gui_running')
+	set guifont=Monospace\ 11
+endif
 
  
 " ==================================
@@ -94,7 +93,7 @@ call vundle#rc()
 	"autocomplete, removed for now.
 
 	" Git bundles
-"	Bundle 'http://github.com/tpope/vim-fugitive.git'
+	Bundle 'http://github.com/tpope/vim-fugitive.git'
 "	Bundle 'https://github.com/tpope/vim-git.git'
 
 	" Unused bundles
