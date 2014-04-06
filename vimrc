@@ -317,8 +317,8 @@ let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 let g:ycm_collect_identifiers_from_tags_files = 1
 
 " Disable YCM
-set runtimepath-=~/.vim/bundle/YouCompleteMe
-set runtimepath-=~/.vim/bundle/YouCompleteMe/after
+"set runtimepath-=~/.vim/bundle/YouCompleteMe
+"set runtimepath-=~/.vim/bundle/YouCompleteMe/after
 " YCM debugging
 "let g:ycm_server_use_vim_stdout = 1
 "let g:ycm_server_log_level = 'debug'
