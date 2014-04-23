@@ -41,6 +41,7 @@ fi
 if [ -f /usr/local/git/contrib/completion/git-prompt.sh ]; then
 	. /usr/local/git/contrib/completion/git-prompt.sh
 fi
+alias __git_ps1="git branch 2>/dev/null | grep '*' | sed 's/* \(.*\)/(\1)/'"
 export PS1='[\u@\h \[\033[1;35m\]\w\[\033[m\]\[\033[m\]]\[\033[1;33m\]$(__git_ps1)\[\033[m\]$ \[\033[0;37;00m\]'
 
 gll()
