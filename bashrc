@@ -115,5 +115,6 @@ fi
 if [[ $platform == 'mac' ]]; then
 	alias vim=/Applications/MacVim.app/Contents/MacOS/Vim
 	alias gvim=mvim
+	alias ctags='exuberant-ctags -R --fields=+l'
 fi
 
