@@ -31,6 +31,10 @@ alias "ctags=ctags -R --fields=+l"
  
 ###################### Git ###########################
 
+function dirtrim {
+	pwd | rev | awk -F / '{print $1,$2}' | rev | sed s_\ _/_
+}
+
 export PROMPT_DIRTRIM=3
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=1
@@ -42,7 +46,7 @@ if [ -f /usr/local/git/contrib/completion/git-prompt.sh ]; then
 	. /usr/local/git/contrib/completion/git-prompt.sh
 fi
 alias __git_ps1="git branch 2>/dev/null | grep '*' | sed 's/* \(.*\)/(\1)/'"
-export PS1='[\u@\h \[\033[1;35m\]\w\[\033[m\]\[\033[m\]]\[\033[1;33m\]$(__git_ps1)\[\033[m\]$ \[\033[0;37;00m\]'
+export PS1='[\u@\h \[\033[1;35m\]$(dirtrim)\[\033[m\]\[\033[m\]]\[\033[1;33m\]$(__git_ps1)\[\033[m\]$ \[\033[0;37;00m\]'
 
 gll()
 {
@@ -116,6 +120,13 @@ fi
 if [[ $platform == 'mac' ]]; then
 	alias vim=/Applications/MacVim.app/Contents/MacOS/Vim
 	alias gvim=mvim
-	alias ctags='exuberant-ctags -R --fields=+l'
+	alias ctags='ctags -R --fields=+l'
 fi
 
+# Fix locale issue when SSHing from Mac to Linux
+export LC_ALL="en_US.UTF-8"
+
+# Find function
+f() {
+	find . -name "*${1}*"
+}
