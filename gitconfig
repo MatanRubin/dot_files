@@ -26,7 +26,7 @@
 	editor = vim
 	excludesfile = ~/.gitignore_global
 [diff]
-	tool = meld
+	tool = p4diff
 
 [difftool]
 	prompt = false
@@ -96,5 +96,14 @@
 	main-window-maximized = false
 	main-window-geometry = 700x550+0+59
 	main-window-view = FileView
+
 [merge]
-	tool = kdiff3
+	tool = p4merge
+
+[mergetool "p4merge"]
+	cmd = p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
+	trustExitCode = false
+
+[difftool "p4diff"]
+	cmd = p4diff "$LOCAL" "$REMOTE"
+
