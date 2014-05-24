@@ -25,6 +25,7 @@
 	whitespace = trailing-space,space-before-tab
 	editor = vim
 	excludesfile = ~/.gitignore_global
+	autocrlf = input
 [diff]
 	tool = p4diff
 
