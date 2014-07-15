@@ -97,4 +97,4 @@
 	main-window-geometry = 700x550+0+59
 	main-window-view = FileView
 [merge]
-	tool = kdiff3
+	tool = meld
