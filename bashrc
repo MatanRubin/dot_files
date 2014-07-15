@@ -27,6 +27,9 @@ alias "v=xclip -o"
 alias "info=info --vi-keys"
 alias "ctags=ctags -R --fields=+l"
 
+# Common SSHs
+alias "r03h07=ssh root@r03h07"
+
 ######################################################
  
 ###################### Git ###########################
