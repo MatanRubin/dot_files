@@ -315,12 +315,14 @@ let g:ycm_global_ycm_extra_conf = '~/dot_files/ycm_extra_conf.py'
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_path_to_python_interpreter = '/usr/bin/python'
 
 " Disable YCM
 "set runtimepath-=~/.vim/bundle/YouCompleteMe
 "set runtimepath-=~/.vim/bundle/YouCompleteMe/after
 " YCM debugging
 "let g:ycm_server_use_vim_stdout = 1
+"let g:ycm_server_keep_logfiles = 1
 "let g:ycm_server_log_level = 'debug'
 
 nnoremap <F3> :YcmCompleter GoToDefinitionElseDeclaration<CR>

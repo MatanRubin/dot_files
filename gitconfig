@@ -96,5 +96,13 @@
 	main-window-maximized = false
 	main-window-geometry = 700x550+0+59
 	main-window-view = FileView
+
 [merge]
 	tool = meld
+
+[mergetool "p4merge"]
+	cmd = p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
+	trustExitCode = false
+
+[difftool "p4diff"]
+	cmd = p4diff "$LOCAL" "$REMOTE"
