@@ -28,9 +28,9 @@ let g:molokai_original = 1
 syntax on
 
 if has ('gui_macvim')
-	set guifont=Menlo:h14
+	set guifont=Menlo:h17
 elseif has ('gui_running')
-	set guifont=Monospace\ 11
+	set guifont=Monospace\ 13
 endif
 
  
