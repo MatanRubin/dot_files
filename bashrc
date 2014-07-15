@@ -118,6 +118,8 @@ if [[ $platform == 'linux' ]]; then
 	fi
 	# set ls colors to ansi-light
 	eval `dircolors ~/dircolors-solarized/dircolors.ansi-light`
+elif [[ $platform == 'mac' ]]; then
+	export LSCOLORS=gxfxcxdxbxegedabagacad
 fi
 
 if [[ $platform == 'mac' ]]; then
