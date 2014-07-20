@@ -29,6 +29,8 @@ alias "ctags=ctags -R --fields=+l"
 
 # Common SSHs
 alias "r03h07=ssh root@r03h07"
+alias "aic7=ssh root@172.29.100.32"
+alias "r03h20=ssh root@r03h20"
 
 ######################################################
  
@@ -135,3 +137,9 @@ export LC_ALL="en_US.UTF-8"
 f() {
 	find . -name "*${1}*"
 }
+
+# Python Virtual Envs
+export WORKON_HOME=~/.virtualenvs
+if [ -e /usr/local/bin/virtualenvwrapper.sh ]; then
+	source /usr/local/bin/virtualenvwrapper.sh
+fi
