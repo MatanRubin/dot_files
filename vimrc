@@ -125,6 +125,13 @@ call vundle#rc()
 	" significantly
 	" Bundle 'https://github.com/xolox/vim-easytags'
 	" Bundle 'https://github.com/xolox/vim-misc'
+	
+	" Matlab Bundles
+	Bundle "https://github.com/lazywei/vim-matlab"
+	source $VIMRUNTIME/macros/matchit.vim
+	autocmd BufEnter *.m    compiler mlint
+
+	
 "endif
 
 if iCanHazVundle == 0
