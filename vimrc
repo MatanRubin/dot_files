@@ -314,7 +314,7 @@ nnoremap <C-Tab> :bn<CR>
 nnoremap <C-\> :tabNext<CR>
 
 " Change current directory to the directory of the file in buffer
-"unmap <silent> <leader>cd :cd %:p:h<cr>:pwd<cr>
+map <silent> <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " YouCompleteMe
 let g:ycm_confirm_extra_conf = 0
