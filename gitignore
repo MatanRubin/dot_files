@@ -99,8 +99,6 @@ build/
 develop-eggs/
 dist/
 eggs/
-lib/
-lib64/
 parts/
 sdist/
 var/
@@ -134,3 +132,6 @@ coverage.xml
 
 # Sphinx documentation
 docs/_build/
+
+# PyCharm
+.idea

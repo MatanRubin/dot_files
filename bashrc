@@ -18,6 +18,8 @@ alias l=less
 alias ll='ls -ltrh -G'
 alias sumcol='paste -sd+ | bc'
 alias dirs='dirs -p -v'
+alias grep='grep --color=auto'
+alias cll='tail -n 1 | pbcopy'
 # GDB Text UI
 alias gdb='gdb -tui'
 # Simpler job control
@@ -28,9 +30,10 @@ alias "info=info --vi-keys"
 alias "ctags=ctags -R --fields=+l"
 
 # Common SSHs
-alias "r03h07=ssh root@r03h07"
+alias "r03h07=ssh maloni@r03h07.il.tonian.com"
 alias "aic7=ssh root@172.29.100.32"
-alias "r03h20=ssh root@r03h20"
+alias "r03h20=ssh root@r03h20.il.tonian.com"
+alias "maloni-vm=ssh maloni@10.100.16.207"
 
 ######################################################
  
@@ -143,3 +146,15 @@ export WORKON_HOME=~/.virtualenvs
 if [ -e /usr/local/bin/virtualenvwrapper.sh ]; then
 	source /usr/local/bin/virtualenvwrapper.sh
 fi
+
+# additional man pages
+export MANPATH=$MANPATH:/Users/maloni/Documents/DashDocsets/FC19/usr/local/share/man
+export MANPATH=$MANPATH:/Users/maloni/Documents/DashDocsets/FC19/usr/share/man/en
+export MANPATH=$MANPATH:/Users/maloni/Documents/DashDocsets/FC19/usr/share/man
+export PATH=/usr/local/sbin:$PATH
+
+# AsciiDoc
+export XML_CATALOG_FILES="/usr/local/etc/xml/catalog"
+
+# Java
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home/
