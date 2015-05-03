@@ -7,7 +7,7 @@ set nocompatible
 set hidden
 set incsearch
 set noerrorbells
-set novisualbell 
+set novisualbell
 let mapleader = ","
 
 " ==================================
@@ -18,7 +18,7 @@ let molokai_file=expand('~/.vim/colors/molokai.vim')
 if !filereadable(molokai_file)
     echo "Installing Molokai color theme."
     silent !mkdir -p ~/.vim/colors
-    silent !wget -P ~/.vim/colors https://raw.github.com/tomasr/molokai/master/colors/molokai.vim 
+    silent !wget -P ~/.vim/colors https://raw.github.com/tomasr/molokai/master/colors/molokai.vim
     let iCanHazMolokai=0
 endif
 
@@ -33,7 +33,7 @@ elseif has ('gui_running')
 	set guifont=Monospace\ 13
 endif
 
- 
+
 " ==================================
 "              VUNDLE AUTO INSTALL
 " "=================================
@@ -41,7 +41,7 @@ endif
 " Based on: http://www.erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
 let iCanHazVundle=1
 let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
- 
+
 if !filereadable(vundle_readme)
 	echo "Installing Vundle.."
 	echo ""
@@ -78,8 +78,8 @@ filetype off
 	Plugin 'Raimondi/delimitMate'
 
 	" User interface plugins
-	"Plugin 'https://github.com/Lokaltog/vim-powerline'
-	Plugin 'https://github.com/mhinz/vim-startify.git'
+	Plugin 'https://github.com/Lokaltog/vim-powerline'
+	"Plugin 'https://github.com/mhinz/vim-startify.git'
 "	Plugin 'fontsize.vim'
 "	Plugin 'git://github.com/altercation/vim-colors-solarized.git'
 "	Plugin 'https://github.com/tpope/vim-vividchalk.git'
@@ -93,7 +93,7 @@ filetype off
 	"Plugin 'pytest.vim' - did not use it so far
 	"Plugin 'https://github.com/davidhalter/jedi-vim' - annoying
 	"autocomplete, removed for now.
-	
+
 	" Matlab plugin
 	Plugin 'MatlabFilesEdition'
 
@@ -124,7 +124,7 @@ filetype off
 	" Be sure to also change the compilation flags according to your
 	" project (instruction in YCM documentation
 	Plugin 'Valloric/YouCompleteMe'
-	
+
 	" Improved C syntax highlighting - highlights user defined functions
 	" These plugins provide nice functionality but slow down vim
 	" significantly
@@ -146,7 +146,6 @@ filetype off
 	"Plugin 'https://github.com/hewes/unite-gtags'
 	"Plugin 'https://github.com/h1mesuke/unite-outline'
 	"Plugin 'https://github.com/ervandew/supertab'
-	
 
 "endif
 
@@ -163,16 +162,16 @@ filetype plugin indent on
 
 " Verilog Module Find
 "map ` ma?^\s*\<module\><CR>Wyiw'a:echo "module -->" @0<CR>
- 
+
 " BuffExplorer
 map <C-b> :BufExplorer<CR>
- 
+
 " NERDTree
 let NERDTreeDirArrows=1
 map <C-n> :NERDTreeToggle<CR>
 scriptencoding utf-8
 set encoding=utf-8
- 
+
 " Tagbar settings
 nnoremap <silent> <F9> :TagbarToggle<CR>
 
@@ -183,6 +182,7 @@ nnoremap <silent> <F9> :TagbarToggle<CR>
 " 	git clone https://github.com/scotu/ubuntu-mono-powerline.git
 set laststatus=2
 let g:Powerline_symbols = 'fancy'
+let g:Powerline_symbols = 'unicode'
 let g:Powerline_theme = 'solarized256'
 
 " CtrlP
@@ -197,13 +197,13 @@ nmap <C-Down> ]e
 " Bubble multiple lines
 vmap <C-Up> [egv
 vmap <C-Down> ]egv
- 
+
 " Indentation Commands
 nmap <D-[> <<
 nmap <D-]> >>
 vmap < <gv
 vmap > >gv
- 
+
 " NERD Commenter
 "map <leader>cc <plug>NERDCommenterMinimal
 "map <D-/> <plug>NERDCommenterToggle
@@ -229,7 +229,7 @@ endif
 
 " Pressing ,v opens the vimrc file in a new tab.
 nmap <leader>v :tabedit $MYVIMRC<CR>
- 
+
 
 " Tab completion
 "au FileType python set omnifunc=pythoncomplete#Complete
@@ -310,7 +310,7 @@ let g:pymode_rope_completion = 0
 "nnoremap <C-l> <C-w>l
 
 "Use Ctrl+Return to rotate between windows
-nnoremap <C-> <C-w><C-w> 
+nnoremap <C-> <C-w><C-w>
 
 "Use Ctrl+Shift+Return to rotate between windows in reverse order
 nnoremap <C-S-> <C-w>W
@@ -452,30 +452,30 @@ imap <C-k> <C-o>d$
 " Unite configuration
 " nnoremap [unite] <Nop>
 " nmap <space> [unite]
-" 
+"
 " let g:unite_prompt='» '
 " let g:unite_data_directory='~/.vim/.cache/unite'
 " "let g:unite_enable_start_insert=1
 " "let g:unite_split_rule = 'botright'
-" 
+"
 " " yank history
 " let g:unite_source_history_yank_enable = 1
 " nnoremap [unite]y :Unite history/yank<cr>
-" 
+"
 " " buffer switching
 " nnoremap [unite]b :Unite -auto-preview -no-split buffer<cr>
-" 
+"
 " " file matching
 " call unite#filters#matcher_default#use(['matcher_fuzzy'])
 " call unite#filters#sorter_default#use(['sorter_rank'])
 " nnoremap <silent> [unite]p :Unite -auto-resize -no-split -auto-preview -start-insert file file_mru file_rec/async:!<cr>
-" 
+"
 " " unite grep
 " map [unite]/ :Unite -no-split -auto-preview -auto-highlight grep:.<cr>
-" 
+"
 " " unite TODO/FIXME
 " map [unite]d :Unite -no-split grep:.:-s:\(TODO\|FIXME\)<cr>
-" 
+"
 " " unite tags
 " let g:unite_source_gtags_project_config = {
 "   \ '/home/foo/project1/': { 'treelize': 0 },
@@ -483,7 +483,7 @@ imap <C-k> <C-o>d$
 "   \ }
 " map [unite]c :Unite gtags/context -no-split -auto-preview -auto-highlight<cr>
 " map [unite]r :Unite gtags/ref -no-split -auto-preview -auto-highlight<cr>
-" 
+"
 " "stil missing:
 "  "Find functions calling this function
 "  "Find functions called by this function
@@ -491,3 +491,11 @@ imap <C-k> <C-o>d$
 
 map <D-/> :call NERDComment(0, 'toggle')<cr>
 inoremap <D-/> <Esc>:call NERDComment(0, 'toggle')<cr>i
+
+" Highlight trailing white spaces
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()

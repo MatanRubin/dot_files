@@ -34,6 +34,7 @@ alias "r03h07=ssh maloni@r03h07.il.tonian.com"
 alias "aic7=ssh root@172.29.100.32"
 alias "r03h20=ssh root@r03h20.il.tonian.com"
 alias "maloni-vm=ssh maloni@10.100.16.207"
+alias "pdfs=cd ~/primarydata/pdfs"
 
 ######################################################
  
@@ -157,4 +158,4 @@ export PATH=/usr/local/sbin:$PATH
 export XML_CATALOG_FILES="/usr/local/etc/xml/catalog"
 
 # Java
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home/
+#export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home/

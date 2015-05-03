@@ -1,14 +1,14 @@
 [user]
-	name = Matan Aloni 
-	email = maloni@primarydata.com
+	name = Matan Rubin 
+	email = matan@primarydata.com
 
 [sendemail]
-	from = Matan Aloni <maloni@xxxxxxx>
+	from = Matan Rubin <matan@xxxxxxx>
 	smtpserver = smtp.gmail.com
 	smtpserverport = 465
 	smtpencryption = ssl
 	smtpdomain = xxxxxx.com
-	smtpuser = maloni@xxxxxx.com
+	smtpuser = matan@xxxxxx.com
 	smtppass = passwd
 	suppresscc = all
 	suppressfrom = yes
@@ -86,6 +86,7 @@
 	reset-head = reset --hard HEAD
 	ls = log --oneline --decorate
 	ll = log --oneline --graph --all --pretty --decorate --date=iso
+	lq = log --oneline --graph --pretty --decorate --date=iso
 	lf = log --graph --all --format=format:'%C(yellow)%h%C(reset) - %C(blue)%ci%C(reset) %C(red)%d%C(reset)%n''  %C(normal)%s%C(reset) %C(bold)- %an %C(dim)<%cE> %C(reset)' --abbrev-commit
 	unstage = reset HEAD --
 	untrack = rm --cached --

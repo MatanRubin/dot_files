@@ -81,11 +81,17 @@ flags = [
 './tests/gmock',
 '-isystem',
 './tests/gmock/include',
-'-I',
-'./src/include',
-'-I',
-'./src/libs'
 ]
+
+def gen_recursive_include_path(dir):
+    subdirs = [x[0] for x in os.walk(dir) if "CMake" not in x[0]]
+    include_path = []
+    for x in subdirs:
+        include_path.extend(['-I', x])
+    return include_path
+
+flags = flags + gen_recursive_include_path('./src')
+flags = flags + gen_recursive_include_path('./build/src')
 
 # Set this to the absolute path to the folder (NOT the file!) containing the
 # compile_commands.json file to use that instead of 'flags'. See here for
