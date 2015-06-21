@@ -28,7 +28,7 @@
 #
 # For more information, please refer to <http://unlicense.org/>
 
-import os
+import os, subprocess
 import ycm_core
 
 # These are the compilation flags that will be used in case there's no
@@ -83,6 +83,13 @@ flags = [
 './tests/gmock/include',
 ]
 
+def find_git_root():
+    pipe = subprocess.Popen(['git', 'rev-parse', '--show-toplevel'],
+                            stdout=subprocess.PIPE)
+    repo_dir = pipe.communicate()[0].rstrip().decode('utf-8')
+    return repo_dir
+
+
 def gen_recursive_include_path(dir):
     subdirs = [x[0] for x in os.walk(dir) if "CMake" not in x[0]]
     include_path = []
@@ -90,8 +97,8 @@ def gen_recursive_include_path(dir):
         include_path.extend(['-I', x])
     return include_path
 
-flags = flags + gen_recursive_include_path('./src')
-flags = flags + gen_recursive_include_path('./build/src')
+flags = flags + gen_recursive_include_path(find_git_root() + '/src')
+flags = flags + gen_recursive_include_path(find_git_root() + '/build/src')
 
 # Set this to the absolute path to the folder (NOT the file!) containing the
 # compile_commands.json file to use that instead of 'flags'. See here for
