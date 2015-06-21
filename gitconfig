@@ -1,5 +1,5 @@
 [user]
-	name = Matan Rubin 
+	name = Matan Rubin
 	email = matan@primarydata.com
 
 [sendemail]
@@ -26,7 +26,7 @@
 	editor = vim
 	excludesfile = ~/.gitignore_global
 [diff]
-	tool = meld
+	tool = kdiff3
 
 [difftool]
 	prompt = false
@@ -91,6 +91,9 @@
 	unstage = reset HEAD --
 	untrack = rm --cached --
 	visual = !gitk
+	spull = subtree pull --squash
+	back = !git checkout `git reflog | head -n 2 | tail -n 1 | \
+		sed -e 's/. HEAD.*//' | awk '{print $NF}' | sed -e 's/(//g'`
 
 
 [giggle]
@@ -99,7 +102,7 @@
 	main-window-view = FileView
 
 [merge]
-	tool = meld
+	tool = kdiff3
 
 [mergetool "p4merge"]
 	cmd = p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
@@ -107,3 +110,6 @@
 
 [difftool "p4diff"]
 	cmd = p4diff "$LOCAL" "$REMOTE"
+
+[log]
+	decorate = true
