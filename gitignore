@@ -94,14 +94,12 @@ __pycache__/
 # C extensions
 
 # Distribution / packaging
-bin/
 build/
 develop-eggs/
 dist/
 eggs/
 parts/
 sdist/
-var/
 *.egg-info/
 .installed.cfg
 *.egg
