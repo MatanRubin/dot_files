@@ -13,21 +13,21 @@ elif [[ $OSTYPE == 'linux-gnu' ]]; then
 fi
 
 ##################### Aliases ########################
-
 alias l=less
 alias ll='ls -ltrh -G'
 alias sumcol='paste -sd+ | bc'
 alias dirs='dirs -p -v'
 alias grep='grep --color=auto'
 alias cll='tail -n 1 | pbcopy'
-# GDB Text UI
-alias gdb='gdb -tui'
 # Simpler job control
 alias j='jobs ; read -p "Activate process number: " job ; fg $job'
 alias "c=xclip"
 alias "v=xclip -o"
 alias "info=info --vi-keys"
-alias "ctags=ctags -R --fields=+l"
+if [[ $platform == 'mac' ]]; then
+	alias gvim=mvim
+	alias ctags='ctags -R --fields=+l'
+fi
 
 # Common SSHs
 alias "r03h07=ssh maloni@r03h07.il.tonian.com"
@@ -36,27 +36,35 @@ alias "r03h20=ssh root@r03h20.il.tonian.com"
 alias "maloni-vm=ssh maloni@10.100.16.207"
 alias "pdfs=cd ~/primarydata/pdfs"
 
-######################################################
- 
-###################### Git ###########################
 
+###################### Git ###########################
+# Bash version on Mac does not support Bash's PROMT_DIRTRIM feature, so we
+# emulate it using this dirtrim function
 function dirtrim {
-	pwd | rev | awk -F / '{print $1,$2}' | rev | sed s_\ _/_
+	pwd | sed s_${HOME}_~_ | rev | awk -F / '{print $1,$2}' | rev | sed s_\ _/_ | sed s_/~_~_
 }
 
 export PROMPT_DIRTRIM=3
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
-if [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
+
+# git bash completion
+if [[ $platform == 'mac' ]]; then
+	. /usr/local/git/contrib/completion/git-prompt.sh
+else
 	. /usr/share/git-core/contrib/completion/git-prompt.sh
 fi
-if [ -f /usr/local/git/contrib/completion/git-prompt.sh ]; then
-	. /usr/local/git/contrib/completion/git-prompt.sh
-fi
-alias __git_ps1="git branch 2>/dev/null | grep '*' | sed 's/* \(.*\)/(\1)/'"
-export PS1='[\u@\h \[\033[1;35m\]$(dirtrim)\[\033[m\]\[\033[m\]]\[\033[1;33m\]$(__git_ps1)\[\033[m\]$ \[\033[0;37;00m\]'
 
+# nice git info on command prompt
+if [[ $platform == 'mac' ]]; then
+	alias __git_ps1="git branch 2>/dev/null | grep '*' | sed 's/* \(.*\)/(\1)/'"
+	export PS1='[\u@\h \[\033[1;35m\]$(dirtrim)\[\033[m\]\[\033[m\]]\[\033[1;33m\]$(__git_ps1)\[\033[m\]$ \[\033[0;37;00m\]'
+else
+	export PS1='[\u@\h \[\033[1;35m\]\w\[\033[m\]\[\033[m\]]\[\033[1;33m\]$(__git_ps1)\[\033[m\]$ \[\033[0;37;00m\]'
+fi
+
+# nice git log for current branch
 gll()
 {
 	git log -n25 --pretty=tformat:"^%Cgreen%h%Creset^%C(yellow)%aN%Creset^%ai^%Cred|%Creset^%d^%s" $@ |
@@ -78,30 +86,17 @@ gll()
 		'
 }
 
-
 # Git aliases
 alias gst='git status'
 alias gco='git checkout'
-alias gds='git diff --cached'   # gds == "git diff, STAGED changes" 
-alias gdu='git diff'            # gdu == "git diff, UNSTAGED changes" 
+alias gds='git diff --cached'   # gds == "git diff, STAGED changes"
+alias gdu='git diff'            # gdu == "git diff, UNSTAGED changes"
 alias gda='git diff HEAD'       # gda == "git diff, ALL changes, stages & unstaged"
 alias gad='git add'
 
 ######################################################
 
 # Colored man pages
-#man() {
-#	env \
-#		LESS_TERMCAP_mb=$(printf "\e[1;31m") \
-#		LESS_TERMCAP_md=$(printf "\e[1;31m") \
-#		LESS_TERMCAP_me=$(printf "\e[0m") \
-#		LESS_TERMCAP_se=$(printf "\e[0m") \
-#		LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
-#		LESS_TERMCAP_ue=$(printf "\e[0m") \
-#		LESS_TERMCAP_us=$(printf "\e[1;32m") \
-#		man "$@"
-#}
-
 man() {
 	env LESS_TERMCAP_mb=$'\E[01;31m' \
 		LESS_TERMCAP_md=$'\E[01;38;5;74m' \
@@ -128,14 +123,11 @@ elif [[ $platform == 'mac' ]]; then
 	export LSCOLORS=gxfxcxdxbxegedabagacad
 fi
 
-if [[ $platform == 'mac' ]]; then
-	alias vim=/Applications/MacVim.app/Contents/MacOS/Vim
-	alias gvim=mvim
-	alias ctags='ctags -R --fields=+l'
-fi
 
 # Fix locale issue when SSHing from Mac to Linux
-export LC_ALL="en_US.UTF-8"
+if [[ $platform == 'mac' ]]; then
+	export LC_ALL="en_US.UTF-8"
+fi
 
 # Find function
 f() {
@@ -149,10 +141,12 @@ if [ -e /usr/local/bin/virtualenvwrapper.sh ]; then
 fi
 
 # additional man pages
-export MANPATH=$MANPATH:/Users/maloni/Documents/DashDocsets/FC19/usr/local/share/man
-export MANPATH=$MANPATH:/Users/maloni/Documents/DashDocsets/FC19/usr/share/man/en
-export MANPATH=$MANPATH:/Users/maloni/Documents/DashDocsets/FC19/usr/share/man
-export PATH=/usr/local/sbin:$PATH
+if [[ $platform == 'mac' ]]; then
+	export MANPATH=$MANPATH:/Users/maloni/Documents/DashDocsets/FC19/usr/local/share/man
+	export MANPATH=$MANPATH:/Users/maloni/Documents/DashDocsets/FC19/usr/share/man/en
+	export MANPATH=$MANPATH:/Users/maloni/Documents/DashDocsets/FC19/usr/share/man
+	export PATH=/usr/local/sbin:$PATH
+fi
 
 # AsciiDoc
 export XML_CATALOG_FILES="/usr/local/etc/xml/catalog"
