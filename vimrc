@@ -94,8 +94,9 @@ filetype off
 	"Plugin 'https://github.com/davidhalter/jedi-vim' - annoying
 	"autocomplete, removed for now.
 
-	" Matlab plugin
+	" Syntax
 	Plugin 'MatlabFilesEdition'
+	Plugin 'https://github.com/solarnz/thrift.vim'
 
 	" Git plugins
 	Plugin 'http://github.com/tpope/vim-fugitive.git'
@@ -137,7 +138,8 @@ filetype off
 
 	"Autocompleteion
 	"Plugin 'autoload_cscope.vim'
-	"Plugin 'https://github.com/chazy/cscope_maps'
+	"Plugin 'https://github.com/vim-scripts/cscope.vim'
+	Plugin 'https://github.com/chazy/cscope_maps'
 	"Plugin 'https://github.com/wesleyche/SrcExpl'
 	"Plugin 'https://github.com/Shougo/unite.vim'
 	"Plugin 'https://github.com/Shougo/vimproc.vim'
@@ -159,6 +161,8 @@ endif
 " "=================================
 "This line must exist after vundle configuration
 filetype plugin indent on
+au BufNewFile,BufRead *.h setlocal ft=c
+au BufNewFile,BufRead *.hpp setlocal ft=c++
 
 " Verilog Module Find
 "map ` ma?^\s*\<module\><CR>Wyiw'a:echo "module -->" @0<CR>
@@ -499,3 +503,31 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
+
+" CScope
+nmap <leader>fs :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <leader>fg :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <leader>fc :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <leader>ft :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <leader>fe :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <leader>ff :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <leader>fi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <leader>fd :cs find d <C-R>=expand("<cword>")<CR><CR>
+"nnoremap <leader>fa :call cscope#findInteractive(expand('<cword>'))<CR>
+"nnoremap <leader>l :call ToggleLocationList()<CR>
+"" s: Find this C symbol
+"nnoremap  <leader>fs :call cscope#find('s', expand('<cword>'))<CR>
+"" g: Find this definition
+"nnoremap  <leader>fg :call cscope#find('g', expand('<cword>'))<CR>
+"" d: Find functions called by this function
+"nnoremap  <leader>fd :call cscope#find('d', expand('<cword>'))<CR>
+"" c: Find functions calling this function
+"nnoremap  <leader>fc :call cscope#find('c', expand('<cword>'))<CR>
+"" t: Find this text string
+"nnoremap  <leader>ft :call cscope#find('t', expand('<cword>'))<CR>
+"" e: Find this egrep pattern
+"nnoremap  <leader>fe :call cscope#find('e', expand('<cword>'))<CR>
+"" f: Find this file
+"nnoremap  <leader>ff :call cscope#find('f', expand('<cword>'))<CR>
+"" i: Find files #including this file
+"nnoremap  <leader>fi :call cscope#find('i', expand('<cword>'))<CR>
