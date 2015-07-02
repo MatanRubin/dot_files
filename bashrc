@@ -6,7 +6,7 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # User specific aliases and functions
-if [[ $OSTYPE == 'darwin13' ]]; then
+if [[ $OSTYPE == 'darwin14' ]]; then
 	platform='mac'
 elif [[ $OSTYPE == 'linux-gnu' ]]; then
 	platform='linux'
