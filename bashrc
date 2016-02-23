@@ -6,7 +6,7 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # User specific aliases and functions
-if [[ $OSTYPE == 'darwin14' ]]; then
+if [[ $OSTYPE == 'darwin15' ]]; then
 	platform='mac'
 elif [[ $OSTYPE == 'linux-gnu' ]]; then
 	platform='linux'
@@ -51,7 +51,9 @@ export GIT_PS1_SHOWUNTRACKEDFILES=1
 
 # git bash completion
 if [[ $platform == 'mac' ]]; then
-	. /usr/local/git/contrib/completion/git-prompt.sh
+	#. /usr/local/git/contrib/completion/git-prompt.sh
+	#. /usr/local/Cellar/bash-git-prompt/2.4.1/share/gitprompt.sh
+	true
 else
 	. /usr/share/git-core/contrib/completion/git-prompt.sh
 fi
