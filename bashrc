@@ -6,7 +6,7 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # User specific aliases and functions
-if [[ $OSTYPE == 'darwin15' ]]; then
+if [[ $OSTYPE == "darwin"* ]]; then
 	platform='mac'
 elif [[ $OSTYPE == 'linux-gnu' ]]; then
 	platform='linux'
@@ -155,3 +155,11 @@ export XML_CATALOG_FILES="/usr/local/etc/xml/catalog"
 
 # Java
 #export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home/
+
+# open zipped files with less, color code source files
+LESSOPEN="|/usr/local/bin/lesspipe.sh %s"; export LESSOPEN
+
+# brew bash-completion
+if [[ $platform == 'mac' ]]; then
+	source $(brew --prefix)/etc/bash_completion
+fi
