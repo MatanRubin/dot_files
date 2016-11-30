@@ -41,13 +41,6 @@ elif [[ $platform == 'windows' ]]; then
 	alias tree='cmd //c tree'
 fi
 
-# Common SSHs
-alias "r03h07=ssh maloni@r03h07.il.tonian.com"
-alias "aic7=ssh root@172.29.100.32"
-alias "r03h20=ssh root@r03h20.il.tonian.com"
-alias "maloni-vm=ssh maloni@10.100.16.207"
-alias "pdfs=cd ~/primarydata/pdfs"
-
 
 ###################### Git ###########################
 # Bash version on Mac does not support Bash's PROMT_DIRTRIM feature, so we
