@@ -10,6 +10,8 @@ if [[ $OSTYPE == "darwin"* ]]; then
 	platform='mac'
 elif [[ $OSTYPE == 'linux-gnu' ]]; then
 	platform='linux'
+elif [[ $OSTYPE == 'msys' ]]; then
+	platform='windows'
 fi
 
 ##################### Aliases ########################
@@ -27,6 +29,16 @@ alias "info=info --vi-keys"
 if [[ $platform == 'mac' ]]; then
 	alias gvim=mvim
 	alias ctags='ctags -R --fields=+l'
+elif [[ $platform == 'windows' ]]; then
+	# vim aliases
+	alias vim='/c/Program\ Files\ \(x86\)/Vim/vim74/vim.exe'
+	alias view='/c/Program\ Files\ \(x86\)/Vim/vim74/vim.exe -R'
+	alias vimdiff='/c/Program\ Files\ \(x86\)/Vim/vim74/vim.exe -d'
+	alias gvim='/c/Program\ Files\ \(x86\)/Vim/vim74/gvim.exe'
+	alias gvimdiff='/c/Program\ Files\ \(x86\)/Vim/vim74/gvim.exe -d'
+
+	# general aliases
+	alias tree='cmd //c tree'
 fi
 
 # Common SSHs
@@ -54,7 +66,7 @@ if [[ $platform == 'mac' ]]; then
 	#. /usr/local/git/contrib/completion/git-prompt.sh
 	#. /usr/local/Cellar/bash-git-prompt/2.4.1/share/gitprompt.sh
 	true
-else
+elif [[ $platform == 'linux' ]]; then
 	. /usr/share/git-core/contrib/completion/git-prompt.sh
 fi
 
@@ -62,7 +74,7 @@ fi
 if [[ $platform == 'mac' ]]; then
 	alias __git_ps1="git branch 2>/dev/null | grep '*' | sed 's/* \(.*\)/(\1)/'"
 	export PS1='[\u@\h \[\033[1;35m\]$(dirtrim)\[\033[m\]\[\033[m\]]\[\033[1;33m\]$(__git_ps1)\[\033[m\]$ \[\033[0;37;00m\]'
-else
+elif [[ $platform == 'linux' ]]; then
 	export PS1='[\u@\h \[\033[1;35m\]\w\[\033[m\]\[\033[m\]]\[\033[1;33m\]$(__git_ps1)\[\033[m\]$ \[\033[0;37;00m\]'
 fi
 
