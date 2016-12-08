@@ -31,11 +31,11 @@ if [[ $platform == 'mac' ]]; then
 	alias ctags='ctags -R --fields=+l'
 elif [[ $platform == 'windows' ]]; then
 	# vim aliases
-	alias vim='/c/Program\ Files\ \(x86\)/Vim/vim74/vim.exe'
-	alias view='/c/Program\ Files\ \(x86\)/Vim/vim74/vim.exe -R'
-	alias vimdiff='/c/Program\ Files\ \(x86\)/Vim/vim74/vim.exe -d'
-	alias gvim='/c/Program\ Files\ \(x86\)/Vim/vim74/gvim.exe'
-	alias gvimdiff='/c/Program\ Files\ \(x86\)/Vim/vim74/gvim.exe -d'
+	alias vim='/c/Program\ Files/Vim/vim74/vim.exe'
+	alias view='/c/Program\ Files/Vim/vim74/vim.exe -R'
+	alias vimdiff='/c/Program\ Files/Vim/vim74/vim.exe -d'
+	alias gvim='start gvim'
+	alias gvimdiff='gvim -d'
 
 	# general aliases
 	alias tree='cmd //c tree'
@@ -153,6 +153,8 @@ if [[ $platform == 'mac' ]]; then
 	export MANPATH=$MANPATH:/Users/maloni/Documents/DashDocsets/FC19/usr/share/man/en
 	export MANPATH=$MANPATH:/Users/maloni/Documents/DashDocsets/FC19/usr/share/man
 	export PATH=/usr/local/sbin:$PATH
+elif [[ $platform == 'windows' ]]; then
+	export PATH=/c/Program\ Files/Vim/vim74:${PATH}
 fi
 
 # AsciiDoc
@@ -168,3 +170,23 @@ LESSOPEN="|/usr/local/bin/lesspipe.sh %s"; export LESSOPEN
 if [[ $platform == 'mac' ]]; then
 	source $(brew --prefix)/etc/bash_completion
 fi
+
+export EDITOR=vim
+
+# maven bash completion
+. ~/.maven_bash_completion.bash
+
+# direnv configuration
+# to use direnv, create a .envrc file in your directory, and then
+# issue `direnv allow .`
+if [[ $platform == 'windows' ]]; then
+	_direnv_hook() {
+		eval "$(direnv export bash)";
+	};
+	if ! [[ "$PROMPT_COMMAND" =~ _direnv_hook ]]; then
+		PROMPT_COMMAND="_direnv_hook;$PROMPT_COMMAND";
+	fi
+elif [[ $platform == 'mac' ]]; then
+	eval "$(direnv hook bash)"
+fi
+

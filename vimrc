@@ -1,4 +1,10 @@
-" General Settings
+"General Settings
+set shell=bash
+if has("win32") || has("win64") || has("win16")
+	if &shell=~#'bash$'
+		set shell=$COMSPEC
+	endif
+endif
 let $PATH = '/usr/bin:'.$PATH
 set number
 set hlsearch
@@ -9,12 +15,16 @@ set incsearch
 set noerrorbells
 set novisualbell
 let mapleader = ","
+set nobackup       "no backup files
+set nowritebackup  "only in case you don't want a backup file while editing
+set noswapfile     "no swap files
 
 " ==================================
 "              MOLOKAI AUTO INSTALL
 " =================================
 let iCanHazMolokai=1
 let molokai_file=expand('~/.vim/colors/molokai.vim')
+"let molokai_file=expand('C:\Users\rubinm3\.vim\colors\molokai.vim')
 if !filereadable(molokai_file)
     echo "Installing Molokai color theme."
     silent !mkdir -p ~/.vim/colors
@@ -30,7 +40,9 @@ syntax on
 if has ('gui_macvim')
 	set guifont=Menlo:h17
 elseif has ('gui_running')
-	set guifont=Monospace\ 13
+	"set guifont=Monospace\ 13
+	set guifont=Consolas:h11:cANSI:qDRAFT
+	set lines=40 columns=140
 endif
 
 
@@ -40,116 +52,120 @@ endif
 " Setting up Vundle - the vim plugin bundler
 " Based on: http://www.erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
 let iCanHazVundle=1
-let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
 
 if !filereadable(vundle_readme)
 	echo "Installing Vundle.."
 	echo ""
 	silent !mkdir -p ~/.vim/bundle
-	silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+	silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 	let iCanHazVundle=0
 endif
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+
 "This line must exist before vundle configuration
 filetype off
-"if has ('gui_running')
-	Plugin 'gmarik/vundle'
-	" Installed Plugins
-	" File navigation plugins
-	Plugin 'ctrlp.vim'
-	Plugin 'Tagbar'
-	Plugin 'The-NERD-tree'
-	Plugin 'bufexplorer.zip'
-	Plugin 'https://github.com/mileszs/ack.vim.git'
-	" Alternate quickley between header and source files in C/C++
-	Plugin 'a.vim'
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
 
-	" Text input plugins
-	"Plugin 'snipMate'
-	Plugin 'https://github.com/SirVer/ultisnips'
-	Plugin 'honza/vim-snippets'
-	Plugin 'SearchComplete'
+" Installed Plugins
+" File navigation plugins
+Plugin 'ctrlp.vim'
+Plugin 'Tagbar'
+Plugin 'The-NERD-tree'
+Plugin 'bufexplorer.zip'
+Plugin 'https://github.com/mileszs/ack.vim.git'
+" Alternate quickley between header and source files in C/C++
+Plugin 'a.vim'
+
+" Text input plugins
+"Plugin 'snipMate'
+Plugin 'https://github.com/SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'SearchComplete'
 "	Plugin 'Tabular'
-	Plugin 'unimpaired.vim'
-	Plugin 'VisIncr'
-	Plugin 'Align'
-	Plugin 'http://github.com/tpope/vim-surround'
-	Plugin 'Raimondi/delimitMate'
+Plugin 'unimpaired.vim'
+Plugin 'VisIncr'
+Plugin 'Align'
+Plugin 'http://github.com/tpope/vim-surround'
+"Plugin 'Raimondi/delimitMate'
 
-	" User interface plugins
-	Plugin 'https://github.com/Lokaltog/vim-powerline'
-	"Plugin 'https://github.com/mhinz/vim-startify.git'
+" User interface plugins
+Plugin 'https://github.com/Lokaltog/vim-powerline', {'rtp': 'powerline/bindings/vim/'}
+"Plugin 'https://github.com/mhinz/vim-startify.git'
 "	Plugin 'fontsize.vim'
 "	Plugin 'git://github.com/altercation/vim-colors-solarized.git'
 "	Plugin 'https://github.com/tpope/vim-vividchalk.git'
 
-	" Python plugins
-	Plugin 'indentpython.vim'
-	Plugin 'klen/python-mode'
-	Plugin 'pyflakes.vim'
-	"Plugin 'pydoc.vim'
-	Plugin 'pep8'
-	"Plugin 'pytest.vim' - did not use it so far
-	"Plugin 'https://github.com/davidhalter/jedi-vim' - annoying
-	"autocomplete, removed for now.
+" Python plugins
+Plugin 'indentpython.vim'
+Plugin 'klen/python-mode'
+Plugin 'pyflakes.vim'
+"Plugin 'pydoc.vim'
+Plugin 'pep8'
+"Plugin 'pytest.vim' - did not use it so far
+"Plugin 'https://github.com/davidhalter/jedi-vim' - annoying
+"autocomplete, removed for now.
 
-	" Syntax
-	Plugin 'MatlabFilesEdition'
-	Plugin 'https://github.com/solarnz/thrift.vim'
+" Syntax
+Plugin 'MatlabFilesEdition'
+Plugin 'https://github.com/solarnz/thrift.vim'
+Plugin 'mustache/vim-mustache-handlebars'
 
-	" Git plugins
-	Plugin 'http://github.com/tpope/vim-fugitive.git'
+" Git plugins
+Plugin 'http://github.com/tpope/vim-fugitive.git'
 "	Plugin 'https://github.com/tpope/vim-git.git'
 
-	" Unused plugins
-	"Plugin 'taglist.vim'
-	"Plugin 'AutoComplPop'
-	"Plugin 'https://github.com/ervandew/supertab.git'
-	"Plugin 'perl-support.vim'
-	"Plugin 'https://github.com/sontek/rope-vim.git'
-	Plugin 'The-NERD-Commenter'
+" Unused plugins
+"Plugin 'taglist.vim'
+"Plugin 'AutoComplPop'
+"Plugin 'https://github.com/ervandew/supertab.git'
+"Plugin 'perl-support.vim'
+"Plugin 'https://github.com/sontek/rope-vim.git'
+Plugin 'The-NERD-Commenter'
 
-	" General plugins
+" General plugins
 "	Plugin 'Gundo'
 "	Plugin 'TaskList.vim'
 "	Plugin 'https://github.com/reinh/vim-makegreen'
 "	Plugin 'https://github.com/rosenfeld/conque-term'
 "	Plugin 'powerman/vim-plugin-viewdoc'
-        Plugin 'https://github.com/brandonbloom/vim-proto'
+Plugin 'https://github.com/brandonbloom/vim-proto'
+Plugin 'tmhedberg/SimpylFold'
 
-	" C plugins
-	"Plugin 'https://github.com/scrooloose/syntastic.git'
-	" YouCompleteMe needs special manual install that is LONG but well
-	" explained in https://github.com/Valloric/YouCompleteMe
-	" Be sure to also change the compilation flags according to your
-	" project (instruction in YCM documentation
-	Plugin 'Valloric/YouCompleteMe'
+" C plugins
+"Plugin 'https://github.com/scrooloose/syntastic.git'
+" YouCompleteMe needs special manual install that is LONG but well
+" explained in https://github.com/Valloric/YouCompleteMe
+" Be sure to also change the compilation flags according to your
+" project (instruction in YCM documentation
+"Plugin 'Valloric/YouCompleteMe'
 
-	" Improved C syntax highlighting - highlights user defined functions
-	" These plugins provide nice functionality but slow down vim
-	" significantly
-	" Plugin 'https://github.com/xolox/vim-easytags'
-	" Plugin 'https://github.com/xolox/vim-misc'
+" Improved C syntax highlighting - highlights user defined functions
+" These plugins provide nice functionality but slow down vim
+" significantly
+" Plugin 'https://github.com/xolox/vim-easytags'
+" Plugin 'https://github.com/xolox/vim-misc'
 
-	" C++ Plugins
-	Plugin 'https://github.com/funorpain/vim-cpplint'
-	Plugin 'https://github.com/vim-scripts/google.vim'
+" C++ Plugins
+Plugin 'https://github.com/funorpain/vim-cpplint'
+Plugin 'https://github.com/vim-scripts/google.vim'
 
-	"Autocompleteion
-	"Plugin 'autoload_cscope.vim'
-	"Plugin 'https://github.com/vim-scripts/cscope.vim'
-	Plugin 'https://github.com/chazy/cscope_maps'
-	"Plugin 'https://github.com/wesleyche/SrcExpl'
-	"Plugin 'https://github.com/Shougo/unite.vim'
-	"Plugin 'https://github.com/Shougo/vimproc.vim'
-	"Plugin 'https://github.com/terryma/vim-multiple-cursors'
-	"Plugin 'https://github.com/Shougo/neomru.vim'
-	"Plugin 'https://github.com/hewes/unite-gtags'
-	"Plugin 'https://github.com/h1mesuke/unite-outline'
-	"Plugin 'https://github.com/ervandew/supertab'
+"Autocompleteion
+"Plugin 'autoload_cscope.vim'
+"Plugin 'https://github.com/vim-scripts/cscope.vim'
+Plugin 'https://github.com/chazy/cscope_maps'
+"Plugin 'https://github.com/wesleyche/SrcExpl'
+"Plugin 'https://github.com/Shougo/unite.vim'
+"Plugin 'https://github.com/Shougo/vimproc.vim'
+"Plugin 'https://github.com/terryma/vim-multiple-cursors'
+"Plugin 'https://github.com/Shougo/neomru.vim'
+"Plugin 'https://github.com/hewes/unite-gtags'
+"Plugin 'https://github.com/h1mesuke/unite-outline'
+"Plugin 'https://github.com/ervandew/supertab'
 
-"endif
+call vundle#end()            " required
+filetype plugin indent on    " required
 
 if iCanHazVundle == 0
         echo "Installing plugins, please ignore key map error messages"
@@ -383,7 +399,7 @@ nnoremap <F3> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 "let g:UltiSnipsSnippetsDir="~/dot_files/ultisnips/"
 
 " Stop YCM completion with enter, in addition to default ctrl+y
-imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
+"imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
 
 " Color Column
 set colorcolumn=80
@@ -407,7 +423,7 @@ inoremap <expr> ;  matchstr(getline('.'), "for") == "for" ? ";" : "\<End>;"
 
 " DelimitMate
 "au FileType c,perl let b:delimitMate_eol_marker = ";"
-let delimitMate_expand_cr = 1
+"let delimitMate_expand_cr = 1
 
 " Spelling
 iab NYLL NULL
@@ -531,3 +547,11 @@ nmap <leader>fd :cs find d <C-R>=expand("<cword>")<CR><CR>
 "nnoremap  <leader>ff :call cscope#find('f', expand('<cword>'))<CR>
 "" i: Find files #including this file
 "nnoremap  <leader>fi :call cscope#find('i', expand('<cword>'))<CR>
+
+" Auto format json text
+com! FormatJSON %!python -m json.tool
+
+" Fold using <space>
+set foldmethod=syntax
+set foldlevel=99
+nnoremap <space> za
