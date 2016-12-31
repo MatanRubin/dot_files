@@ -1,6 +1,6 @@
 [user]
 	name = Matan Rubin
-	email = matan.rubin@dell.com
+	email = matanaloni@gmail.com
 
 [sendemail]
 	from = Matan Rubin <matan@xxxxxxx>
@@ -25,7 +25,7 @@
 	whitespace = trailing-space,space-before-tab
 	editor = vim
 	excludesfile = ~/.gitignore_global
-	autocrlf = true
+	autocrlf = input
 [diff]
 	tool = kdiff3
 
