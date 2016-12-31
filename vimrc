@@ -38,7 +38,7 @@ let g:molokai_original = 1
 syntax on
 
 if has ('gui_macvim')
-	set guifont=Menlo:h17
+	set guifont=Meslo\ LG\ M\ Regular\ for\ Powerline:h17
 elseif has ('gui_running')
 	"set guifont=Monospace\ 13
 	set guifont=Consolas:h11:cANSI:qDRAFT
@@ -79,7 +79,6 @@ Plugin 'https://github.com/mileszs/ack.vim.git'
 Plugin 'a.vim'
 
 " Text input plugins
-"Plugin 'snipMate'
 Plugin 'https://github.com/SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'SearchComplete'
@@ -91,7 +90,7 @@ Plugin 'http://github.com/tpope/vim-surround'
 "Plugin 'Raimondi/delimitMate'
 
 " User interface plugins
-Plugin 'https://github.com/Lokaltog/vim-powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 "Plugin 'https://github.com/mhinz/vim-startify.git'
 "	Plugin 'fontsize.vim'
 "	Plugin 'git://github.com/altercation/vim-colors-solarized.git'
@@ -111,6 +110,7 @@ Plugin 'pep8'
 Plugin 'MatlabFilesEdition'
 Plugin 'https://github.com/solarnz/thrift.vim'
 Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'glench/vim-jinja2-syntax'
 
 " Git plugins
 Plugin 'http://github.com/tpope/vim-fugitive.git'
@@ -163,6 +163,10 @@ Plugin 'https://github.com/chazy/cscope_maps'
 "Plugin 'https://github.com/hewes/unite-gtags'
 "Plugin 'https://github.com/h1mesuke/unite-outline'
 "Plugin 'https://github.com/ervandew/supertab'
+Plugin 'editorconfig/editorconfig-vim'
+
+" Swift
+Plugin 'https://github.com/keith/swift.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -392,7 +396,7 @@ nnoremap <F3> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 "endfunction
 "
 "let g:UltiSnipsExpandTrigger="<tab>"
-"let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
 "au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
 
 " User defined Snippets
@@ -440,8 +444,8 @@ iab retrun return
 " Emacs shortcuts
 set winaltkeys=no "To enable shortcut with Alt, otherwise Alt open GUI menus.
 " insert mode
-imap <C-b> <Left>
-imap <C-f> <Right>
+imap <C-b> <C-[>i
+imap <C-f> <C-o>a
 imap <C-a> <C-o>^
 imap <C-e> <End>
 imap <M-b> <C-o>b
@@ -555,3 +559,14 @@ com! FormatJSON %!python -m json.tool
 set foldmethod=syntax
 set foldlevel=99
 nnoremap <space> za
+
+" Disable arrow keys (and get used to working with hjkl)
+"noremap <Up> <nop>
+"noremap <Down> <nop>
+"noremap <Left> <nop>
+"noremap <Right> <nop>
+
+"inoremap <Up> <nop>
+"inoremap <Down> <nop>
+"inoremap <Left> <nop>
+"inoremap <Right> <nop>
