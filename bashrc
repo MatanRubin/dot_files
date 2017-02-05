@@ -41,6 +41,10 @@ elif [[ $platform == 'windows' ]]; then
 	alias tree='cmd //c tree'
 fi
 
+alias mci='mvn clean install'
+alias mcc='mvn clean compile'
+
+
 
 ###################### Git ###########################
 # Bash version on Mac does not support Bash's PROMT_DIRTRIM feature, so we
@@ -190,3 +194,13 @@ elif [[ $platform == 'mac' ]]; then
 	eval "$(direnv hook bash)"
 fi
 
+#enable powerline
+if [[ $platform == 'mac' ]]; then
+	powerline-daemon -q
+	POWERLINE_BASH_CONTINUATION=1
+	POWERLINE_BASH_SELECT=1
+	source /usr/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+fi
+
+# Golang setup
+export GOPATH="c:/Users/rubinm3/gocode/"

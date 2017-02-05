@@ -18,6 +18,8 @@ let mapleader = ","
 set nobackup       "no backup files
 set nowritebackup  "only in case you don't want a backup file while editing
 set noswapfile     "no swap files
+set backspace=indent,eol,start " backspace over indentation, newlines
+set clipboard=unnamed " copy to system clipboard
 
 " ==================================
 "              MOLOKAI AUTO INSTALL
@@ -75,20 +77,17 @@ Plugin 'Tagbar'
 Plugin 'The-NERD-tree'
 Plugin 'bufexplorer.zip'
 Plugin 'https://github.com/mileszs/ack.vim.git'
-" Alternate quickley between header and source files in C/C++
-Plugin 'a.vim'
+Plugin 'a.vim' " Alternate quickley between header and source files in C/C++
 
 " Text input plugins
-"Plugin 'snipMate'
-Plugin 'https://github.com/SirVer/ultisnips'
+Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'SearchComplete'
-"	Plugin 'Tabular'
 Plugin 'unimpaired.vim'
 Plugin 'VisIncr'
 Plugin 'Align'
 Plugin 'http://github.com/tpope/vim-surround'
-"Plugin 'Raimondi/delimitMate'
+Plugin 'Raimondi/delimitMate'
 
 " User interface plugins
 Plugin 'https://github.com/Lokaltog/vim-powerline', {'rtp': 'powerline/bindings/vim/'}
@@ -99,13 +98,12 @@ Plugin 'https://github.com/Lokaltog/vim-powerline', {'rtp': 'powerline/bindings/
 
 " Python plugins
 Plugin 'indentpython.vim'
-Plugin 'klen/python-mode'
-Plugin 'pyflakes.vim'
+"Plugin 'klen/python-mode'
+"Plugin 'pyflakes.vim'
 "Plugin 'pydoc.vim'
 Plugin 'pep8'
 "Plugin 'pytest.vim' - did not use it so far
-"Plugin 'https://github.com/davidhalter/jedi-vim' - annoying
-"autocomplete, removed for now.
+Plugin 'https://github.com/davidhalter/jedi-vim'
 
 " Syntax
 Plugin 'MatlabFilesEdition'
@@ -151,6 +149,9 @@ Plugin 'tmhedberg/SimpylFold'
 Plugin 'https://github.com/funorpain/vim-cpplint'
 Plugin 'https://github.com/vim-scripts/google.vim'
 
+" YAML
+Plugin 'stephpy/vim-yaml'
+
 "Autocompleteion
 "Plugin 'autoload_cscope.vim'
 "Plugin 'https://github.com/vim-scripts/cscope.vim'
@@ -163,6 +164,11 @@ Plugin 'https://github.com/chazy/cscope_maps'
 "Plugin 'https://github.com/hewes/unite-gtags'
 "Plugin 'https://github.com/h1mesuke/unite-outline'
 "Plugin 'https://github.com/ervandew/supertab'
+Plugin 'vimwiki/vimwiki'
+Plugin 'airblade/vim-rooter' " cd to root of project when opening a file
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'alvan/closetag.vim'
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.xml"
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -184,11 +190,11 @@ au BufNewFile,BufRead *.hpp setlocal ft=c++
 "map ` ma?^\s*\<module\><CR>Wyiw'a:echo "module -->" @0<CR>
 
 " BuffExplorer
-map <C-b> :BufExplorer<CR>
+nnoremap <C-b> :BufExplorer<CR>
 
 " NERDTree
 let NERDTreeDirArrows=1
-map <C-n> :NERDTreeToggle<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
 scriptencoding utf-8
 set encoding=utf-8
 
@@ -212,17 +218,17 @@ let g:ctrlp_working_path_mode = 'ra'
 
 " Unimpaired
 " Bubble single lines
-nmap <C-Up> [e
-nmap <C-Down> ]e
+nnoremap <C-Up> [e
+nnoremap <C-Down> ]e
 " Bubble multiple lines
-vmap <C-Up> [egv
-vmap <C-Down> ]egv
+vnoremap <C-Up> [egv
+vnoremap <C-Down> ]egv
 
 " Indentation Commands
-nmap <D-[> <<
-nmap <D-]> >>
-vmap < <gv
-vmap > >gv
+nnoremap <D-[> <<
+nnoremap <D-]> >>
+vnoremap < <gv
+vnoremap > >gv
 
 " NERD Commenter
 "map <leader>cc <plug>NERDCommenterMinimal
@@ -256,7 +262,7 @@ nmap <leader>v :tabedit $MYVIMRC<CR>
 "let g:SuperTabDefaultCompletionType = "context"
 
 " Ack
-nmap <leader>a <Esc>:Ack!
+nnoremap <leader>a <Esc>:Ack!
 
 
 "nmap <F3> = jedi#goto_definitions_command
@@ -310,6 +316,15 @@ let g:pymode_rope_completion = 0
 " Jedi-vim
 "let  g:jedi#use_tabs_not_buffers = 0
 "let g:jedi#completions_enable = 0
+let g:jedi#popup_on_dot = 0
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_definitions_command = "<leader>d"
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<leader>n"
+let g:jedi#rename_command = "<leader>r"
+let g:jedi#show_call_signatures = "0"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#smart_auto_mappings = 0
 
 " Vim Python Debugger
 "map <S-F5> :Dbg .<CR>
@@ -358,12 +373,12 @@ nnoremap <C-\> :tabNext<CR>
 "unmap <silent> <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " YouCompleteMe
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_global_ycm_extra_conf = '~/dot_files/ycm_extra_conf.py'
-let g:ycm_key_list_select_completion = ['<Down>']
-let g:ycm_key_list_previous_completion = ['<Up>']
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+"let g:ycm_confirm_extra_conf = 0
+"let g:ycm_global_ycm_extra_conf = '~/dot_files/ycm_extra_conf.py'
+"let g:ycm_key_list_select_completion = ['<Down>']
+"let g:ycm_key_list_previous_completion = ['<Up>']
+"let g:ycm_collect_identifiers_from_tags_files = 1
+"let g:ycm_path_to_python_interpreter = '/usr/bin/python'
 
 " Disable YCM
 "set runtimepath-=~/.vim/bundle/YouCompleteMe
@@ -373,27 +388,11 @@ let g:ycm_path_to_python_interpreter = '/usr/bin/python'
 "let g:ycm_server_keep_logfiles = 1
 "let g:ycm_server_log_level = 'debug'
 
-nnoremap <F3> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"nnoremap <F3> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
-" Complete UltiSnip snippets with <tab>
-"function! g:UltiSnips_Complete()
-"    call UltiSnips#ExpandSnippet()
-"    if g:ulti_expand_res == 0
-"	if pumvisible()
-"	    return "\<C-n>"
-"	else
-"	    call UltiSnips#JumpForwards()
-"	    if g:ulti_jump_forwards_res == 0
-"	       return "\<TAB>"
-"	    endif
-"	endif
-"    endif
-"    return ""
-"endfunction
-"
-"let g:UltiSnipsExpandTrigger="<tab>"
-"let g:UltiSnipsJumpForwardTrigger="<tab>"
-"au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 
 " User defined Snippets
 "let g:UltiSnipsSnippetsDir="~/dot_files/ultisnips/"
@@ -422,8 +421,8 @@ inoremap <expr> ;  matchstr(getline('.'), "for") == "for" ? ";" : "\<End>;"
 
 
 " DelimitMate
-"au FileType c,perl let b:delimitMate_eol_marker = ";"
-"let delimitMate_expand_cr = 1
+au FileType c,perl let b:delimitMate_eol_marker = ";"
+let delimitMate_expand_cr = 1
 
 " Spelling
 iab NYLL NULL
@@ -440,17 +439,17 @@ iab retrun return
 " Emacs shortcuts
 set winaltkeys=no "To enable shortcut with Alt, otherwise Alt open GUI menus.
 " insert mode
-imap <C-b> <Left>
-imap <C-f> <Right>
-imap <C-a> <C-o>^
-imap <C-e> <End>
-imap <M-b> <C-o>b
-imap <M-f> <C-o>e<Right>
-imap <C-d> <Del>
-imap <C-h> <BS>
-imap <M-d> <C-o>de
-imap <M-h> <C-w>
-imap <C-k> <C-o>d$
+inoremap <C-b> <Left>
+inoremap <C-f> <Right>
+inoremap <C-a> <C-o>^
+inoremap <C-e> <End>
+inoremap <M-b> <C-o>b
+inoremap <M-f> <C-o>e<Right>
+inoremap <C-d> <Del>
+inoremap <C-h> <BS>
+inoremap <M-d> <C-o>de
+inoremap <M-h> <C-w>
+inoremap <C-k> <C-o>d$
 
 " command line mode
 "cmap <C-p> <Up>
@@ -509,7 +508,7 @@ imap <C-k> <C-o>d$
 "  "Find functions called by this function
 "  "Find files #including this file
 
-map <D-/> :call NERDComment(0, 'toggle')<cr>
+noremap <D-/> :call NERDComment(0, 'toggle')<cr>
 inoremap <D-/> <Esc>:call NERDComment(0, 'toggle')<cr>i
 
 " Highlight trailing white spaces
@@ -521,14 +520,14 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
 " CScope
-nmap <leader>fs :cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <leader>fg :cs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <leader>fc :cs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <leader>ft :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <leader>fe :cs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <leader>ff :cs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <leader>fi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <leader>fd :cs find d <C-R>=expand("<cword>")<CR><CR>
+nnoremap <leader>fs :cs find s <C-R>=expand("<cword>")<CR><CR>
+nnoremap <leader>fg :cs find g <C-R>=expand("<cword>")<CR><CR>
+nnoremap <leader>fc :cs find c <C-R>=expand("<cword>")<CR><CR>
+nnoremap <leader>ft :cs find t <C-R>=expand("<cword>")<CR><CR>
+nnoremap <leader>fe :cs find e <C-R>=expand("<cword>")<CR><CR>
+nnoremap <leader>ff :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nnoremap <leader>fi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nnoremap <leader>fd :cs find d <C-R>=expand("<cword>")<CR><CR>
 "nnoremap <leader>fa :call cscope#findInteractive(expand('<cword>'))<CR>
 "nnoremap <leader>l :call ToggleLocationList()<CR>
 "" s: Find this C symbol
@@ -555,3 +554,42 @@ com! FormatJSON %!python -m json.tool
 set foldmethod=syntax
 set foldlevel=99
 nnoremap <space> za
+
+" VimWiki configuration
+nnoremap <Leader>wq <Plug>VimwikiVSplitLink
+autocmd bufreadpre *.wiki setlocal textwidth=79
+
+autocmd bufreadpre *.java setlocal textwidth=120 colorcolumn=120
+" persistent undo
+set undofile                " Save undo's after file closes
+set undodir=$HOME/.vim/undo " where to save undo histories
+set undolevels=1000         " How many undos
+set undoreload=10000        " number of lines to save for undo
+
+" Open URLs and Jira tickets using <leader>u
+function! HandleURL()
+	let s:uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;]*')
+	let s:jira = matchstr(getline("."), 'CNDP-[1-9]*')
+	let browser = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
+	if s:uri != ""
+		silent exec '!start "' . browser . '" ' . s:uri
+	elseif s:jira != ""
+		let s:jira_uri = 'https://jira.cec.lab.emc.com:8443/browse/'.s:jira
+		silent exec '!start "' . browser . '" ' . s:jira_uri
+	else
+		echo "No URI or JIRA ticket found in line."
+	endif
+endfunction
+map <leader>u :call HandleURL()<cr>
+
+"" no one is really happy until you have this shortcuts
+cnoreabbrev W! w!
+cnoreabbrev Q! q!
+cnoreabbrev Qall! qall!
+cnoreabbrev Wq wq
+cnoreabbrev Wa wa
+cnoreabbrev wQ wq
+cnoreabbrev WQ wq
+cnoreabbrev W w
+cnoreabbrev Q q
+cnoreabbrev Qall qall

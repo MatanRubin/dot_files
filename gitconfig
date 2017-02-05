@@ -15,8 +15,11 @@
 	signedoffbycc = no
 	chainreplyto = no
 
+[fetch]
+	prune = true
+
 [push]
-	default = current
+	default = nothing
 
 [branch]
 	autosetuprebase = always
