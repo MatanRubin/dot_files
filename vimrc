@@ -40,7 +40,7 @@ let g:molokai_original = 1
 syntax on
 
 if has ('gui_macvim')
-	set guifont=Menlo:h17
+	set guifont=Meslo\ LG\ M\ Regular\ for\ Powerline:h17
 elseif has ('gui_running')
 	"set guifont=Monospace\ 13
 	set guifont=Consolas:h11:cANSI:qDRAFT
@@ -90,7 +90,7 @@ Plugin 'http://github.com/tpope/vim-surround'
 Plugin 'Raimondi/delimitMate'
 
 " User interface plugins
-Plugin 'https://github.com/Lokaltog/vim-powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 "Plugin 'https://github.com/mhinz/vim-startify.git'
 "	Plugin 'fontsize.vim'
 "	Plugin 'git://github.com/altercation/vim-colors-solarized.git'
@@ -109,6 +109,7 @@ Plugin 'https://github.com/davidhalter/jedi-vim'
 Plugin 'MatlabFilesEdition'
 Plugin 'https://github.com/solarnz/thrift.vim'
 Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'glench/vim-jinja2-syntax'
 
 " Git plugins
 Plugin 'http://github.com/tpope/vim-fugitive.git'
@@ -168,6 +169,9 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'airblade/vim-rooter' " cd to root of project when opening a file
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'alvan/closetag.vim'
+
+" Swift
+Plugin 'https://github.com/keith/swift.vim'
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.xml"
 
 call vundle#end()            " required
@@ -345,10 +349,12 @@ let g:jedi#smart_auto_mappings = 0
 "nnoremap <C-l> <C-w>l
 
 "Use Ctrl+Return to rotate between windows
-nnoremap <C-> <C-w><C-w>
+nnoremap <C-
+> <C-w><C-w>
 
 "Use Ctrl+Shift+Return to rotate between windows in reverse order
-nnoremap <C-S-> <C-w>W
+nnoremap <C-S-
+> <C-w>W
 
 " New vertical split: ,s
 map <leader>s <C-w><C-v>
@@ -565,6 +571,17 @@ set undofile                " Save undo's after file closes
 set undodir=$HOME/.vim/undo " where to save undo histories
 set undolevels=1000         " How many undos
 set undoreload=10000        " number of lines to save for undo
+
+" Disable arrow keys (and get used to working with hjkl)
+"noremap <Up> <nop>
+"noremap <Down> <nop>
+"noremap <Left> <nop>
+"noremap <Right> <nop>
+
+"inoremap <Up> <nop>
+"inoremap <Down> <nop>
+"inoremap <Left> <nop>
+"inoremap <Right> <nop>
 
 " Open URLs and Jira tickets using <leader>u
 function! HandleURL()
