@@ -202,5 +202,7 @@ if [[ $platform == 'mac' ]]; then
 	. /usr/local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 fi
 
-# Golang setup
-export GOPATH="c:/Users/rubinm3/gocode/"
+# Virtualenvwrapper
+export WORKON_HOME=~/.virtualenvs
+export PROJECT_HOME=~/Projects
+source /usr/local/bin/virtualenvwrapper.sh

@@ -1,6 +1,6 @@
 [user]
 	name = Matan Rubin
-	email = matanaloni@gmail.com
+	email = matan@dronecraft.io
 
 [sendemail]
 	from = Matan Rubin <matan@xxxxxxx>
@@ -117,3 +117,11 @@
 
 [log]
 	decorate = true
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+	template = /Users/maloni/.stCommitMsg

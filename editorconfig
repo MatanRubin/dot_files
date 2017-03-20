@@ -10,11 +10,13 @@ insert_final_newline = true
 end_of_line = lf
 
 # Set default charset
-[*.{js,py}]
+[*.js]
 charset = utf-8
+indent_style = space
+indent_size = 2
 
 # 4 space indentation
-[*.{py,java,xml}]
+[*.{py,java,xml,json,yaml,yml,swift,cs}]
 indent_style = space
 indent_size = 4
 
