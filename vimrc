@@ -42,11 +42,10 @@ syntax on
 if has ('gui_macvim')
 	set guifont=Meslo\ LG\ M\ Regular\ for\ Powerline:h17
 elseif has ('gui_running')
-	"set guifont=Monospace\ 13
-	set guifont=Consolas:h11:cANSI:qDRAFT
+	" Linux font
+	set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 14
 	set lines=40 columns=140
 endif
-
 
 " ==================================
 "              VUNDLE AUTO INSTALL
@@ -133,7 +132,8 @@ Plugin 'https://github.com/brandonbloom/vim-proto'
 Plugin 'tmhedberg/SimpylFold'
 
 " C plugins
-"Plugin 'https://github.com/scrooloose/syntastic.git'
+Plugin 'scrooloose/syntastic'
+let g:syntastic_javascript_checkers = ['eslint']
 " YouCompleteMe needs special manual install that is LONG but well
 " explained in https://github.com/Valloric/YouCompleteMe
 " Be sure to also change the compilation flags according to your
@@ -173,6 +173,14 @@ Plugin 'alvan/closetag.vim'
 " Swift
 Plugin 'https://github.com/keith/swift.vim'
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.xml"
+
+" Javascript
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+let g:jsx_ext_required = 0   " Allow JSX in .js files
+Plugin 'elzr/vim-json'
+Plugin 'alvan/vim-closetag'
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx"
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -219,6 +227,7 @@ let g:Powerline_theme = 'solarized256'
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_extensions = ['dir', 'mixed']
 let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_by_filename = 1
 
 " Unimpaired
 " Bubble single lines
@@ -349,12 +358,10 @@ let g:jedi#smart_auto_mappings = 0
 "nnoremap <C-l> <C-w>l
 
 "Use Ctrl+Return to rotate between windows
-nnoremap <C-
-> <C-w><C-w>
+nnoremap <C-> <C-w><C-w>
 
 "Use Ctrl+Shift+Return to rotate between windows in reverse order
-nnoremap <C-S-
-> <C-w>W
+nnoremap <C-S-> <C-w>W
 
 " New vertical split: ,s
 map <leader>s <C-w><C-v>

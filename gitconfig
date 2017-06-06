@@ -77,12 +77,9 @@
 	cmd = git pull --rebase
 
 [alias]
-       log-pretty  = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-
-[alias]
 	st = status -b
 	br = branch
-	df = diff
+	df = diff --ws-error-highlight=all
 	co = checkout
 	push-tags = push --tags
 	clean-fxd = clean -fxd
@@ -98,6 +95,9 @@
 	spull = subtree pull --squash
 	back = !git checkout `git reflog | head -n 2 | tail -n 1 | \
 		sed -e 's/. HEAD.*//' | awk '{print $NF}' | sed -e 's/(//g'`
+       log-pretty  = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	fixup = "!f() { TARGET=$(git rev-parse "$1"); git commit --fixup=$TARGET ${@:2} && EDITOR=true git rebase -i --autostash --autosquash $TARGET^; }; f"
+
 
 
 [giggle]
@@ -107,6 +107,7 @@
 
 [merge]
 	tool = kdiff3
+	keepBackup = false
 
 [mergetool "p4merge"]
 	cmd = p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
@@ -117,3 +118,5 @@
 
 [log]
 	decorate = true
+[credential]
+	helper = store

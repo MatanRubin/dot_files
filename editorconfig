@@ -27,16 +27,24 @@ indent_style = tab
 indent_style = space
 indent_size = 2
 
+# 2 space indentation
+[*.{js,jsx,css,scss}]
+indent_style = space
+indent_size = 2
+
 # Matches the exact files either package.json or .travis.yml
 [{package.json,.travis.yml}]
 indent_style = space
 indent_size = 2
 
 # Matches the exact files either package.json or .travis.yml
-[*.{yml,yaml}]
+[*.{yml,yaml,html}]
 indent_style = space
 indent_size = 2
 
 [*.mustache]
 indent_style = space
 indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false

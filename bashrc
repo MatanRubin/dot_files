@@ -41,10 +41,14 @@ elif [[ $platform == 'windows' ]]; then
 	alias tree='cmd //c tree'
 fi
 
-alias mci='mvn clean install'
-alias mcc='mvn clean compile'
+alias mci='mvn clean install -T 1C'
+alias mcc='mvn clean compile -T 1C'
+alias pgadmin='docker run --rm -p 5050:5050 thajeztah/pgadmin4'
 
-
+if [[ $platform == 'linux' ]]; then
+	# Colored terminal
+	export TERM=xterm-256color
+fi
 
 ###################### Git ###########################
 # Bash version on Mac does not support Bash's PROMT_DIRTRIM feature, so we
@@ -64,7 +68,8 @@ if [[ $platform == 'mac' ]]; then
 	#. /usr/local/Cellar/bash-git-prompt/2.4.1/share/gitprompt.sh
 	true
 elif [[ $platform == 'linux' ]]; then
-	. /usr/share/git-core/contrib/completion/git-prompt.sh
+	source /etc/bash_completion
+	source /etc/bash_completion.d/git-prompt
 fi
 
 # nice git info on command prompt
@@ -150,14 +155,11 @@ export WORKON_HOME=~/.virtualenvs
 if [ -e /usr/local/bin/virtualenvwrapper.sh ]; then
 	source /usr/local/bin/virtualenvwrapper.sh
 fi
+if [ -e /home/maloni/.local/bin/virtualenvwrapper.sh ]; then
+	source /home/maloni/.local/bin/virtualenvwrapper.sh
+fi
 
-# additional man pages
-if [[ $platform == 'mac' ]]; then
-	export MANPATH=$MANPATH:/Users/maloni/Documents/DashDocsets/FC19/usr/local/share/man
-	export MANPATH=$MANPATH:/Users/maloni/Documents/DashDocsets/FC19/usr/share/man/en
-	export MANPATH=$MANPATH:/Users/maloni/Documents/DashDocsets/FC19/usr/share/man
-	export PATH=/usr/local/sbin:$PATH
-elif [[ $platform == 'windows' ]]; then
+if [[ $platform == 'windows' ]]; then
 	export PATH=/c/Program\ Files/Vim/vim74:${PATH}
 fi
 
@@ -190,7 +192,7 @@ if [[ $platform == 'windows' ]]; then
 	if ! [[ "$PROMPT_COMMAND" =~ _direnv_hook ]]; then
 		PROMPT_COMMAND="_direnv_hook;$PROMPT_COMMAND";
 	fi
-elif [[ $platform == 'mac' ]]; then
+else
 	eval "$(direnv hook bash)"
 fi
 
@@ -203,4 +205,15 @@ if [[ $platform == 'mac' ]]; then
 fi
 
 # Golang setup
-export GOPATH="c:/Users/rubinm3/gocode/"
+export GOPATH="/home/maloni/dell/go/"
+export GOROOT="/usr/local/go"
+
+# Fuzzy file search
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# remove duplicates from history. Makes using fzf C-R much better
+export HISTCONTROL=ignoreboth:erasedups
+
+# DellEMC specific
+alias deploy='pushd /home/maloni/dell/demo/pcf-triple-demo/deployer/target/classes && ./deploy.sh && popd'
+alias swagger-codegen='java -jar ~/github/swagger-codegen/modules/swagger-codegen-cli/target/swagger-codegen-cli.jar'
