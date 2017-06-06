@@ -208,6 +208,11 @@ fi
 export GOPATH="/home/maloni/dell/go/"
 export GOROOT="/usr/local/go"
 
+# Virtualenvwrapper
+export WORKON_HOME=~/.virtualenvs
+export PROJECT_HOME=~/Projects
+source /usr/local/bin/virtualenvwrapper.sh
+
 # Fuzzy file search
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
