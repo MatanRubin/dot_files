@@ -76,13 +76,12 @@ Plugin 'Tagbar'
 Plugin 'The-NERD-tree'
 Plugin 'bufexplorer.zip'
 Plugin 'https://github.com/mileszs/ack.vim.git'
-Plugin 'a.vim' " Alternate quickley between header and source files in C/C++
 
 " Text input plugins
 Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'SearchComplete'
-Plugin 'unimpaired.vim'
+"Plugin 'unimpaired.vim'
 Plugin 'VisIncr'
 Plugin 'Align'
 Plugin 'http://github.com/tpope/vim-surround'
@@ -105,7 +104,7 @@ Plugin 'pep8'
 Plugin 'https://github.com/davidhalter/jedi-vim'
 
 " Syntax
-Plugin 'MatlabFilesEdition'
+"Plugin 'MatlabFilesEdition'
 Plugin 'https://github.com/solarnz/thrift.vim'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'glench/vim-jinja2-syntax'
@@ -132,13 +131,14 @@ Plugin 'https://github.com/brandonbloom/vim-proto'
 Plugin 'tmhedberg/SimpylFold'
 
 " C plugins
+"Plugin 'a.vim' " Alternate quickley between header and source files in C/C++
 Plugin 'scrooloose/syntastic'
 let g:syntastic_javascript_checkers = ['eslint']
 " YouCompleteMe needs special manual install that is LONG but well
 " explained in https://github.com/Valloric/YouCompleteMe
 " Be sure to also change the compilation flags according to your
 " project (instruction in YCM documentation
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 
 " Improved C syntax highlighting - highlights user defined functions
 " These plugins provide nice functionality but slow down vim
@@ -147,8 +147,24 @@ let g:syntastic_javascript_checkers = ['eslint']
 " Plugin 'https://github.com/xolox/vim-misc'
 
 " C++ Plugins
-Plugin 'https://github.com/funorpain/vim-cpplint'
-Plugin 'https://github.com/vim-scripts/google.vim'
+"Plugin 'https://github.com/funorpain/vim-cpplint'
+"Plugin 'https://github.com/vim-scripts/google.vim'
+
+" JavaScript
+Plugin 'scrooloose/syntastic'
+let g:syntastic_javascript_checkers = ['eslint']
+
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+
+Plugin 'elzr/vim-json'
+Plugin 'marijnh/tern_for_vim'
+let g:tern_map_keys=1 "enable keyboard shortcuts
+let g:tern_show_argument_hints='on_hold' "show argument hints
+
+Plugin 'alvan/closetag.vim'
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.xml,*.js"
 
 " YAML
 Plugin 'stephpy/vim-yaml'
@@ -156,7 +172,7 @@ Plugin 'stephpy/vim-yaml'
 "Autocompleteion
 "Plugin 'autoload_cscope.vim'
 "Plugin 'https://github.com/vim-scripts/cscope.vim'
-Plugin 'https://github.com/chazy/cscope_maps'
+"Plugin 'https://github.com/chazy/cscope_maps'
 "Plugin 'https://github.com/wesleyche/SrcExpl'
 "Plugin 'https://github.com/Shougo/unite.vim'
 "Plugin 'https://github.com/Shougo/vimproc.vim'
@@ -165,14 +181,12 @@ Plugin 'https://github.com/chazy/cscope_maps'
 "Plugin 'https://github.com/hewes/unite-gtags'
 "Plugin 'https://github.com/h1mesuke/unite-outline'
 "Plugin 'https://github.com/ervandew/supertab'
-Plugin 'vimwiki/vimwiki'
-Plugin 'airblade/vim-rooter' " cd to root of project when opening a file
+"Plugin 'vimwiki/vimwiki'
+"Plugin 'airblade/vim-rooter' " cd to root of project when opening a file
 Plugin 'editorconfig/editorconfig-vim'
-Plugin 'alvan/closetag.vim'
 
 " Swift
 Plugin 'https://github.com/keith/swift.vim'
-let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.xml"
 
 " Javascript
 Plugin 'pangloss/vim-javascript'
@@ -225,7 +239,8 @@ let g:Powerline_theme = 'solarized256'
 
 " CtrlP
 let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_extensions = ['dir', 'mixed']
+let g:ctrlp_by_filename = 1
+let g:ctrlp_extensions = ['mixed']
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_by_filename = 1
 
@@ -246,20 +261,6 @@ vnoremap > >gv
 " NERD Commenter
 "map <leader>cc <plug>NERDCommenterMinimal
 "map <D-/> <plug>NERDCommenterToggle
-
-" SnipMate
-"nmap ,rs :call ReloadSnippets(snippets_dir, &filetype)<CR>
-" To add the ReloadSnippets function, add the following to SnipMate.vim:
-"function! ReloadSnippets( snippets_dir, ft )
-    "if strlen( a:ft ) == 0
-        "let filetype = "_"
-    "else
-        "let filetype = a:ft
-    "endif
-
-    "call ResetSnippets()
-    "call GetSnippets( a:snippets_dir, filetype )
-"endfunction
 
 "Source the vimrc file after saving it
 if has("autocmd")
@@ -358,10 +359,12 @@ let g:jedi#smart_auto_mappings = 0
 "nnoremap <C-l> <C-w>l
 
 "Use Ctrl+Return to rotate between windows
-nnoremap <C-> <C-w><C-w>
+nnoremap <C-
+> <C-w><C-w>
 
 "Use Ctrl+Shift+Return to rotate between windows in reverse order
-nnoremap <C-S-> <C-w>W
+nnoremap <C-S-
+> <C-w>W
 
 " New vertical split: ,s
 map <leader>s <C-w><C-v>
@@ -403,9 +406,9 @@ nnoremap <C-\> :tabNext<CR>
 
 "nnoremap <F3> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+let g:UltiSnipsExpandTrigger="<c-g>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " User defined Snippets
 "let g:UltiSnipsSnippetsDir="~/dot_files/ultisnips/"
@@ -617,3 +620,13 @@ cnoreabbrev WQ wq
 cnoreabbrev W w
 cnoreabbrev Q q
 cnoreabbrev Qall qall
+
+" Syntastic
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
