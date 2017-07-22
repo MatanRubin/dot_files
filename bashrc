@@ -44,6 +44,7 @@ fi
 alias mci='mvn clean install -T 1C'
 alias mcc='mvn clean compile -T 1C'
 alias pgadmin='docker run --rm -p 5050:5050 thajeztah/pgadmin4'
+alias path='readlink -f'
 
 if [[ $platform == 'linux' ]]; then
 	# Colored terminal

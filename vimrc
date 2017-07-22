@@ -28,10 +28,10 @@ let iCanHazMolokai=1
 let molokai_file=expand('~/.vim/colors/molokai.vim')
 "let molokai_file=expand('C:\Users\rubinm3\.vim\colors\molokai.vim')
 if !filereadable(molokai_file)
-    echo "Installing Molokai color theme."
-    silent !mkdir -p ~/.vim/colors
-    silent !wget -P ~/.vim/colors https://raw.github.com/tomasr/molokai/master/colors/molokai.vim
-    let iCanHazMolokai=0
+	echo "Installing Molokai color theme."
+	silent !mkdir -p ~/.vim/colors
+	silent !wget -P ~/.vim/colors https://raw.github.com/tomasr/molokai/master/colors/molokai.vim
+	let iCanHazMolokai=0
 endif
 
 " Color Scheme
@@ -43,8 +43,9 @@ if has ('gui_macvim')
 	set guifont=Meslo\ LG\ M\ Regular\ for\ Powerline:h17
 elseif has ('gui_running')
 	" Linux font
-	set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 14
-	set lines=40 columns=140
+	"set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 14
+	set guifont=Meslo\ LG\ L\ for\ Powerline\ 12
+	set lines=999 columns=999
 endif
 
 " ==================================
@@ -81,11 +82,16 @@ Plugin 'https://github.com/mileszs/ack.vim.git'
 Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'SearchComplete'
-"Plugin 'unimpaired.vim'
+Plugin 'unimpaired.vim' " for bubbling text
 Plugin 'VisIncr'
 Plugin 'Align'
 Plugin 'http://github.com/tpope/vim-surround'
 Plugin 'Raimondi/delimitMate'
+
+Plugin 'vim-scripts/YankRing.vim'
+nnoremap <silent> <F11> :YRShow<CR>
+let g:yankring_replace_n_pkey = '<C-F11>'
+let g:yankring_replace_n_nkey = '<C-F11>'
 
 " User interface plugins
 Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
@@ -132,8 +138,6 @@ Plugin 'tmhedberg/SimpylFold'
 
 " C plugins
 "Plugin 'a.vim' " Alternate quickley between header and source files in C/C++
-Plugin 'scrooloose/syntastic'
-let g:syntastic_javascript_checkers = ['eslint']
 " YouCompleteMe needs special manual install that is LONG but well
 " explained in https://github.com/Valloric/YouCompleteMe
 " Be sure to also change the compilation flags according to your
@@ -153,18 +157,8 @@ Plugin 'Valloric/YouCompleteMe'
 " JavaScript
 Plugin 'scrooloose/syntastic'
 let g:syntastic_javascript_checkers = ['eslint']
+noremap <F4> :SyntasticToggleMode<CR>
 
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-let g:jsx_ext_required = 0 " Allow JSX in normal JS files
-
-Plugin 'elzr/vim-json'
-Plugin 'marijnh/tern_for_vim'
-let g:tern_map_keys=1 "enable keyboard shortcuts
-let g:tern_show_argument_hints='on_hold' "show argument hints
-
-Plugin 'alvan/closetag.vim'
-let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.xml,*.js"
 
 " YAML
 Plugin 'stephpy/vim-yaml'
@@ -194,15 +188,18 @@ Plugin 'mxw/vim-jsx'
 let g:jsx_ext_required = 0   " Allow JSX in .js files
 Plugin 'elzr/vim-json'
 Plugin 'alvan/vim-closetag'
-let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx"
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx,*.xml"
+Plugin 'marijnh/tern_for_vim'
+let g:tern_map_keys=1 "enable keyboard shortcuts
+let g:tern_show_argument_hints='on_hold' "show argument hints
 
 call vundle#end()            " required
 filetype plugin indent on    " required
 
 if iCanHazVundle == 0
-        echo "Installing plugins, please ignore key map error messages"
-        echo ""
-        :PluginInstall
+	echo "Installing plugins, please ignore key map error messages"
+	echo ""
+	:PluginInstall
 endif
 " ==================================
 "                 PLUGINS SETTINGS
@@ -258,13 +255,19 @@ nnoremap <D-]> >>
 vnoremap < <gv
 vnoremap > >gv
 
+" re-indent the entire file
+nnoremap <C-i> mzgg=G`z
+
 " NERD Commenter
 "map <leader>cc <plug>NERDCommenterMinimal
 "map <D-/> <plug>NERDCommenterToggle
 
 "Source the vimrc file after saving it
 if has("autocmd")
-  autocmd bufwritepost .vimrc source $MYVIMRC
+	augroup vimrc_reload
+		autocmd!
+		autocmd bufwritepost .vimrc source $MYVIMRC
+	augroup END
 endif
 
 " Pressing ,v opens the vimrc file in a new tab.
@@ -359,12 +362,10 @@ let g:jedi#smart_auto_mappings = 0
 "nnoremap <C-l> <C-w>l
 
 "Use Ctrl+Return to rotate between windows
-nnoremap <C-
-> <C-w><C-w>
+nnoremap <C-ENTER> <C-w><C-w>
 
 "Use Ctrl+Shift+Return to rotate between windows in reverse order
-nnoremap <C-S-
-> <C-w>W
+nnoremap <C-S-ENTER> <C-w>W
 
 " New vertical split: ,s
 map <leader>s <C-w><C-v>
@@ -394,7 +395,7 @@ nnoremap <C-\> :tabNext<CR>
 "let g:ycm_key_list_select_completion = ['<Down>']
 "let g:ycm_key_list_previous_completion = ['<Up>']
 "let g:ycm_collect_identifiers_from_tags_files = 1
-"let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+let g:ycm_path_to_python_interpreter = '/usr/bin/python2'
 
 " Disable YCM
 "set runtimepath-=~/.vim/bundle/YouCompleteMe
@@ -411,13 +412,13 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " User defined Snippets
-"let g:UltiSnipsSnippetsDir="~/dot_files/ultisnips/"
+let g:UltiSnipsSnippetsDir="~/github/dot_files/ultisnips/"
 
 " Stop YCM completion with enter, in addition to default ctrl+y
 "imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
 
 " Color Column
-set colorcolumn=80
+set colorcolumn=100
 
 " Auto close brackets
 "inoremap {      {}<Left>
@@ -519,14 +520,6 @@ inoremap <C-k> <C-o>d$
 " map [unite]c :Unite gtags/context -no-split -auto-preview -auto-highlight<cr>
 " map [unite]r :Unite gtags/ref -no-split -auto-preview -auto-highlight<cr>
 "
-" "stil missing:
-"  "Find functions calling this function
-"  "Find functions called by this function
-"  "Find files #including this file
-
-noremap <D-/> :call NERDComment(0, 'toggle')<cr>
-inoremap <D-/> <Esc>:call NERDComment(0, 'toggle')<cr>i
-
 " Highlight trailing white spaces
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
@@ -630,3 +623,11 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" select all
+nnoremap <C-a> 1G<S-v>0G
+
+" split lines at cursor
+:nnoremap <C-j> i<CR><ESC>
+
+
