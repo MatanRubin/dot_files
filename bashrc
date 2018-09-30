@@ -1,7 +1,5 @@
 # .bashrc
 
-export LC_ALL=C.UTF-8
-export LANG=C.UTF-8
 # Source global definitions
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
@@ -61,6 +59,8 @@ fi
 if [[ $platform == 'mac' ]]; then
 	# brew bash-completion
 	source $(brew --prefix)/etc/bash_completion
+	# Fix locale issue when SSHing from Mac to Linux
+	export LC_ALL="en_US.UTF-8"
 elif [[ $platform == 'linux' ]]; then
 	# Colored terminal
 	export TERM=xterm-256color
