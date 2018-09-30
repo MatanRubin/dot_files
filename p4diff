@@ -1,3 +1,0 @@
-#!/bin/sh
-[ $# -eq 2 ] && /usr/local/bin/p4merge $*
-[ $# -eq 7 ] && /usr/local/bin/p4merge "$2" "$5"
