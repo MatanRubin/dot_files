@@ -3,11 +3,17 @@
 import os
 from os import path
 import platform
+from subprocess import call
 
 
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 HOME_DIR = path.expanduser("~")
 PLATFORM = platform.system()
+
+def install_tmux_tpm():
+    if not path.exists("~/.tmux/plugins/tpm"):
+        call("git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm".split())
+
 
 def create_directories():
     os.makedirs(path.join(HOME_DIR, ".vim/undo"))
@@ -47,6 +53,7 @@ def install_packages():
 
 def main():
     create_symlinks()
+    install_tmux_tpm()
     # install_brew()
     # install_brew_packages()
 
