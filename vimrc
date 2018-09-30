@@ -21,26 +21,8 @@ set noswapfile     "no swap files
 set backspace=indent,eol,start " backspace over indentation, newlines
 set clipboard=unnamed " copy to system clipboard
 
-" ==================================
-"              MOLOKAI AUTO INSTALL
-" =================================
-let iCanHazMolokai=1
-let molokai_file=expand('~/.vim/colors/molokai.vim')
-"let molokai_file=expand('C:\Users\rubinm3\.vim\colors\molokai.vim')
-if !filereadable(molokai_file)
-	echo "Installing Molokai color theme."
-	silent !mkdir -p ~/.vim/colors
-	silent !wget -P ~/.vim/colors https://raw.github.com/tomasr/molokai/master/colors/molokai.vim
-	let iCanHazMolokai=0
-endif
-
-" Color Scheme
-colorscheme molokai
-let g:molokai_original = 1
-syntax on
-
 if has ('gui_macvim')
-	set guifont=Meslo\ LG\ M\ Regular\ for\ Powerline:h17
+	set guifont=Meslo\ LG\ M\ Regular\ for\ Powerline:h14
 elseif has ('gui_running')
 	" Linux font
 	"set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 14
@@ -57,7 +39,7 @@ let iCanHazVundle=1
 let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
 
 if !filereadable(vundle_readme)
-	echo "Installing Vundle.."
+	echo "Installing Vundle..."
 	echo ""
 	silent !mkdir -p ~/.vim/bundle
 	silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -95,17 +77,14 @@ let g:yankring_replace_n_nkey = '<C-F11>'
 
 " User interface plugins
 Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
-"Plugin 'https://github.com/mhinz/vim-startify.git'
-"	Plugin 'fontsize.vim'
-"	Plugin 'git://github.com/altercation/vim-colors-solarized.git'
-"	Plugin 'https://github.com/tpope/vim-vividchalk.git'
+Plugin 'tomasr/molokai'
 
 " Python plugins
 Plugin 'indentpython.vim'
 "Plugin 'klen/python-mode'
 "Plugin 'pyflakes.vim'
 "Plugin 'pydoc.vim'
-Plugin 'pep8'
+"Plugin 'pep8'
 "Plugin 'pytest.vim' - did not use it so far
 Plugin 'https://github.com/davidhalter/jedi-vim'
 
@@ -123,7 +102,6 @@ Plugin 'http://github.com/tpope/vim-fugitive.git'
 "Plugin 'taglist.vim'
 "Plugin 'AutoComplPop'
 "Plugin 'https://github.com/ervandew/supertab.git'
-"Plugin 'perl-support.vim'
 "Plugin 'https://github.com/sontek/rope-vim.git'
 Plugin 'The-NERD-Commenter'
 
@@ -145,8 +123,7 @@ Plugin 'tmhedberg/SimpylFold'
 Plugin 'Valloric/YouCompleteMe'
 
 " Improved C syntax highlighting - highlights user defined functions
-" These plugins provide nice functionality but slow down vim
-" significantly
+" These plugins provide nice functionality but slow down vim significantly
 " Plugin 'https://github.com/xolox/vim-easytags'
 " Plugin 'https://github.com/xolox/vim-misc'
 
@@ -209,8 +186,10 @@ filetype plugin indent on
 au BufNewFile,BufRead *.h setlocal ft=c
 au BufNewFile,BufRead *.hpp setlocal ft=c++
 
-" Verilog Module Find
-"map ` ma?^\s*\<module\><CR>Wyiw'a:echo "module -->" @0<CR>
+" Color Scheme
+colorscheme molokai
+let g:molokai_original = 1
+syntax on
 
 " BuffExplorer
 nnoremap <C-b> :BufExplorer<CR>
@@ -395,7 +374,7 @@ nnoremap <C-\> :tabNext<CR>
 "let g:ycm_key_list_select_completion = ['<Down>']
 "let g:ycm_key_list_previous_completion = ['<Up>']
 "let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_path_to_python_interpreter = '/usr/bin/python2'
+"let g:ycm_path_to_python_interpreter = '/usr/bin/python2'
 
 " Disable YCM
 "set runtimepath-=~/.vim/bundle/YouCompleteMe
@@ -447,12 +426,6 @@ iab retrun return
 
 " Commenting
 
-" x and xx perform "cut", d and dd perform "delete"
-"noremap x d
-"noremap xx dd
-"noremap d "_d
-"noremap dd "_dd
-
 " Emacs shortcuts
 set winaltkeys=no "To enable shortcut with Alt, otherwise Alt open GUI menus.
 " insert mode
@@ -484,42 +457,6 @@ inoremap <C-k> <C-o>d$
 "cnoremap <C-k> <C-f>D<C-c><C-c>:<Up>
 
 
-" . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-" Unite configuration
-" nnoremap [unite] <Nop>
-" nmap <space> [unite]
-"
-" let g:unite_prompt='» '
-" let g:unite_data_directory='~/.vim/.cache/unite'
-" "let g:unite_enable_start_insert=1
-" "let g:unite_split_rule = 'botright'
-"
-" " yank history
-" let g:unite_source_history_yank_enable = 1
-" nnoremap [unite]y :Unite history/yank<cr>
-"
-" " buffer switching
-" nnoremap [unite]b :Unite -auto-preview -no-split buffer<cr>
-"
-" " file matching
-" call unite#filters#matcher_default#use(['matcher_fuzzy'])
-" call unite#filters#sorter_default#use(['sorter_rank'])
-" nnoremap <silent> [unite]p :Unite -auto-resize -no-split -auto-preview -start-insert file file_mru file_rec/async:!<cr>
-"
-" " unite grep
-" map [unite]/ :Unite -no-split -auto-preview -auto-highlight grep:.<cr>
-"
-" " unite TODO/FIXME
-" map [unite]d :Unite -no-split grep:.:-s:\(TODO\|FIXME\)<cr>
-"
-" " unite tags
-" let g:unite_source_gtags_project_config = {
-"   \ '/home/foo/project1/': { 'treelize': 0 },
-"   \ '_':                   { 'treelize': 1 }
-"   \ }
-" map [unite]c :Unite gtags/context -no-split -auto-preview -auto-highlight<cr>
-" map [unite]r :Unite gtags/ref -no-split -auto-preview -auto-highlight<cr>
-"
 " Highlight trailing white spaces
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
@@ -575,17 +512,6 @@ set undodir=$HOME/.vim/undo " where to save undo histories
 set undolevels=1000         " How many undos
 set undoreload=10000        " number of lines to save for undo
 
-" Disable arrow keys (and get used to working with hjkl)
-"noremap <Up> <nop>
-"noremap <Down> <nop>
-"noremap <Left> <nop>
-"noremap <Right> <nop>
-
-"inoremap <Up> <nop>
-"inoremap <Down> <nop>
-"inoremap <Left> <nop>
-"inoremap <Right> <nop>
-
 " Open URLs and Jira tickets using <leader>u
 function! HandleURL()
 	let s:uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;]*')
@@ -621,7 +547,7 @@ cnoreabbrev Qall qall
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
 " select all

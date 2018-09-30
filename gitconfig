@@ -1,6 +1,6 @@
 [user]
 	name = Matan Rubin
-	email = matan@dronecraft.io
+	email = matanaloni@gmail.com
 
 [sendemail]
 	from = Matan Rubin <matan@xxxxxxx>
@@ -27,7 +27,7 @@
 [core]
 	whitespace = trailing-space,space-before-tab
 	editor = vim
-	excludesfile = ~/.gitignore_global
+	excludesfile = /Users/matan.r/.gitignore_global
 	autocrlf = input
 [diff]
 	tool = kdiff3
@@ -122,7 +122,15 @@
 	helper = store
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
 
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[commit]
+	template = /Users/matan.r/.stCommitMsg
+[cola]
+	spellcheck = false
+[pager]
+	diff = diff-so-fancy | less --tabs=1,5 -RFX
+	show = diff-so-fancy | less --tabs=1,5 -RFX
