@@ -14,6 +14,15 @@ elif [[ $OSTYPE == 'msys' ]]; then
 	platform='windows'
 fi
 
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+	session_type=ssh
+else
+	case $(ps -o comm= -p $PPID) in
+		sshd|*/sshd) session_type=ssh;;
+		*) session_type=local
+	esac
+fi
+
 ##################### Aliases ########################
 alias l=bat
 alias ll='ls -ltrh -G'
@@ -91,7 +100,12 @@ fi
 # nice git info on command prompt
 if [[ $platform == 'mac' ]]; then
 	alias __git_ps1="git branch 2>/dev/null | grep '*' | sed 's/* \(.*\)/(\1)/'"
-	export PS1='[\u@\h \[\033[1;35m\]$(dirtrim)\[\033[m\]\[\033[m\]]\[\033[1;33m\]$(__git_ps1)\[\033[m\]$ \[\033[0;37;00m\]'
+	if [[ $session_type == 'ssh' ]]; then
+		# Color hostname in different color when in remote SSH
+		export PS1='\u@\h \[\033[1;35m\]$(dirtrim)\[\033[m\]\[\033[m\] \[\033[1;33m\]$(__git_ps1)\[\033[m\]$ \[\033[0;37;00m\]'
+	else
+		export PS1='\[\033[1;35m\]$(dirtrim)\[\033[m\]\[\033[m\] \[\033[1;33m\]$(__git_ps1)\[\033[m\]$ \[\033[0;37;00m\]'
+	fi
 elif [[ $platform == 'linux' ]]; then
 	export PS1='[\u@\h \[\033[1;35m\]\w\[\033[m\]\[\033[m\]]\[\033[1;33m\]$(__git_ps1)\[\033[m\]$ \[\033[0;37;00m\]'
 fi
