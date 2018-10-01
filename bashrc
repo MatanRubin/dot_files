@@ -32,17 +32,17 @@ alias mci='mvn clean install -T 1C'
 alias mcc='mvn clean compile -T 1C'
 alias pgadmin='docker run --rm -p 5050:5050 thajeztah/pgadmin4'
 alias path='readlink -f'
-alias cat='bat'
-alias ping='prettyping --nolegend'
 alias preview="fzf --preview 'bat --color \"always\" {}'"
 alias p="preview"
-alias du="ncdu --color dark -rr -x --exclude .git"
 alias code='cd ~/Code/SolarEdge/'
 
 ################### Platform specific aliases ###################
 if [[ $platform == 'mac' ]]; then
 	alias gvim=mvim
 	alias ctags='ctags -R --fields=+l'
+	alias ping='prettyping --nolegend'
+	alias cat='bat'
+	alias du="ncdu --color dark -rr -x --exclude .git"
 elif [[ $platform == 'windows' ]]; then
 	# vim aliases
 	alias vim='/c/Program\ Files/Vim/vim74/vim.exe'

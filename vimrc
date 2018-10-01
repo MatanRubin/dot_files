@@ -120,7 +120,7 @@ Plugin 'tmhedberg/SimpylFold'
 " explained in https://github.com/Valloric/YouCompleteMe
 " Be sure to also change the compilation flags according to your
 " project (instruction in YCM documentation
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 
 " Improved C syntax highlighting - highlights user defined functions
 " These plugins provide nice functionality but slow down vim significantly
