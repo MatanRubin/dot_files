@@ -169,7 +169,7 @@ if [[ $platform == 'windows' ]]; then
 	if ! [[ "$PROMPT_COMMAND" =~ _direnv_hook ]]; then
 		PROMPT_COMMAND="_direnv_hook;$PROMPT_COMMAND";
 	fi
-else
+elif [[ $platform == 'mac' ]]; then
 	eval "$(direnv hook bash)"
 fi
 
