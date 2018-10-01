@@ -12,7 +12,7 @@ PLATFORM = platform.system()
 
 
 def install_tmux_tpm():
-    repo_dir = path.exists("~/.tmux/plugins/tpm")
+    repo_dir = path.join(HOME_DIR, ".tmux/plugins/tpm")
     if not path.exists(repo_dir):
         print("Installing tmux tpm plugin manager")
         call("git clone https://github.com/tmux-plugins/tpm {}".format(repo_dir).split())
