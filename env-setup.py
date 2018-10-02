@@ -4,6 +4,7 @@ import os
 from os import path
 import platform
 from subprocess import call
+import filecmp
 
 
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
