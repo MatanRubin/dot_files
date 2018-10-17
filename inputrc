@@ -1,5 +1,2 @@
-# Replicate tcsh Esc+p feature
-"\ep": "\M-\C-p\C-e"
-"\M-\C-p": history-search-backward
 "\e[1;3D": backward-word
 "\e[1;3C": forward-word
