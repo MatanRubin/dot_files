@@ -79,7 +79,7 @@ def install_mac_packages():
     '''
 
     print("Installing brew packages: {}".format(packages))
-    os.system('brew install ' + packages)
+    os.system('brew install ' + " ".join(packages.split()))
 
     cask_packages = '''
     caffeine
@@ -91,7 +91,7 @@ def install_mac_packages():
     wireshark
     '''
     print("Installing brew cask packages: {}".format(cask_packages))
-    os.system('brew cask install ' + cask_packages)
+    os.system('brew cask install ' + " ".join(cask_packages.split()))
 
 
 def main():
