@@ -89,14 +89,6 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
 
-# git bash completion
-if [[ $platform == 'mac' ]]; then
-	source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash
-elif [[ $platform == 'linux' ]]; then
-	source /etc/bash_completion
-	source /etc/bash_completion.d/git-prompt
-fi
-
 # nice git info on command prompt
 if [[ $platform == 'mac' ]]; then
 	alias __git_ps1="git branch 2>/dev/null | grep '*' | sed 's/* \(.*\)/(\1)/'"

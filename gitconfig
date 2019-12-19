@@ -61,9 +61,6 @@
 #	changed = red
 #	untracked = yellow
 
-[color "grep"]
-	external = --color=always
-
 [guitool "Rebase onto..."]
 	cmd = git rebase
 	revprompt = yes
@@ -84,7 +81,7 @@
 	push-tags = push --tags
 	clean-fxd = clean -fxd
 	add-commit = commit -a
-	reset-head = reset --hard HEAD
+	hard-reset-head = reset --hard HEAD
 	ls = log --oneline --decorate
 	ll = log --oneline --graph --all --pretty --decorate --date=iso
 	lq = log --oneline --graph --pretty --decorate --date=iso
@@ -127,8 +124,6 @@
 [mergetool "sourcetree"]
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
-[commit]
-	template = /Users/matan.r/.stCommitMsg
 [cola]
 	spellcheck = false
 [pager]
